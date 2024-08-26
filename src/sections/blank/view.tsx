@@ -102,12 +102,18 @@ export function BlankView({ title = 'Blank' }: Props) {
                 height: '100%',
                 backgroundColor: 'white',
                 borderRadius: '30.06px',
-                paddingTop: 10,
-                paddingX: 2,
+                paddingTop: 9,
+                paddingX: 1,
+                overflow: 'scroll',
+                /// ocultar barra de desplazamiento
+                '&::-webkit-scrollbar': {
+                  display: 'none',
+                },
               }}
             >
               {/* Aquí va tu contenido */}
-              <div id="container-luka-demo" />
+
+              <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
             </Box>
           </Box>
         </Box>

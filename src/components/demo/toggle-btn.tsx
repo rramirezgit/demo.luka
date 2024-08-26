@@ -34,7 +34,6 @@ const ToggleButton = () => {
   const handleToggle = (option: 'mobile' | 'desktop') => {
     setSelected(option);
     const isHorizontal = option === 'mobile';
-    debugger;
     setFieldValue('horizontal', isHorizontal);
     const html = document.getElementById('container-luka-demo');
     if (html) {
@@ -44,7 +43,6 @@ const ToggleButton = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      debugger;
       // document.getElementById('luka-loader-btn')?.click();
     }, 1000);
   }, [horizontal]);
