@@ -1,10 +1,9 @@
-import { usePathname } from './use-pathname';
-import { hasParams, removeParams, isExternalLink, removeLastSlash } from '../utils';
+import { hasParams, removeParams, isExternalLink } from '../utils';
 
 // ----------------------------------------------------------------------
 
 export function useActiveLink(itemPath: string, deep: boolean = true): boolean {
-  const pathname = removeLastSlash(usePathname());
+  const pathname = '';
 
   const pathHasParams = hasParams(itemPath);
 
