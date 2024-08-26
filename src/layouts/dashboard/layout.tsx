@@ -81,7 +81,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
               langs: [
                 { value: 'eng', label: 'English', countryCode: 'GB' },
                 { value: 'esp', label: 'Español', countryCode: 'ES' },
-                { value: 'jpn', label: 'Japones', countryCode: 'JP' },
+                // { value: 'jpn', label: 'Japones', countryCode: 'JP' },
               ],
               account: _account,
               contacts: _contacts,

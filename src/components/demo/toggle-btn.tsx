@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
 import { Box, IconButton } from '@mui/material';
 
+import { CONFIG } from 'src/config-global';
 import { useFormStore } from 'src/store/demoFormStore';
 
 import { Iconify } from '../iconify';
@@ -28,14 +29,25 @@ const Divider = styled('div')(({ theme }) => ({
 const ToggleButton = () => {
   const [selected, setSelected] = useState<'mobile' | 'desktop'>('desktop');
 
-  const { setFieldValue } = useFormStore();
-
+  const { setFieldValue, horizontal } = useFormStore();
+  const { urlCdn } = CONFIG;
   const handleToggle = (option: 'mobile' | 'desktop') => {
     setSelected(option);
     const isHorizontal = option === 'mobile';
-    console.log('isHorizontal', isHorizontal);
+    debugger;
     setFieldValue('horizontal', isHorizontal);
+    const html = document.getElementById('container-luka-demo');
+    if (html) {
+      html.innerHTML = '';
+    }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      debugger;
+      // document.getElementById('luka-loader-btn')?.click();
+    }, 1000);
+  }, [horizontal]);
 
   return (
     <ToggleContainer>

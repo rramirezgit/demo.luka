@@ -85,6 +85,7 @@ export function LukaLoaderButton() {
 
   const handleLoadClick = (e: React.MouseEvent) => {
     setLukaInitialized(false);
+    console.log('horizontal', horizontal);
     initializeLuka({
       montoConfig: {
         monto: parseFloat(strMonto),
@@ -133,6 +134,7 @@ export function LukaLoaderButton() {
   return (
     <Button
       fullWidth
+      id="luka-loader-btn"
       color="primary"
       sx={{
         height: 50,

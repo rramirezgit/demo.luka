@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client';
 
 import type { IconButtonProps } from '@mui/material/IconButton';
@@ -8,6 +10,8 @@ import { useState, useCallback } from 'react';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
+
+import { useFormStore } from 'src/store/demoFormStore';
 
 import { varHover } from 'src/components/animate';
 import { FlagIcon } from 'src/components/iconify';
@@ -28,15 +32,15 @@ export function LanguagePopover({ data = [], sx, ...other }: LanguagePopoverProp
 
   const [locale, setLocale] = useState<string>(data[0].value);
 
+  const { setFieldValue } = useFormStore();
+
   const currentLang = data.find((lang) => lang.value === locale);
 
-  const handleChangeLang = useCallback(
-    (newLang: string) => {
-      setLocale(newLang);
-      popover.onClose();
-    },
-    [popover]
-  );
+  const handleChangeLang = useCallback((newLang: string) => {
+    setLocale(newLang);
+    setFieldValue('idioma', newLang);
+    popover.onClose();
+  }, []);
 
   return (
     <>

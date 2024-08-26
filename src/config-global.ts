@@ -16,6 +16,7 @@ export type ConfigValue = {
   userName: string;
   password: string;
   urlCdn: string;
+  urlCdnBack: string;
 };
 
 // ----------------------------------------------------------------------
@@ -33,5 +34,6 @@ export const CONFIG: ConfigValue = {
   userName: process.env.USERNAME ?? '',
   password: process.env.PASSWORD ?? '',
   authUrl: process.env.AUTH_URL ?? '',
-  urlCdn: process.env.URL_CDN ?? '',
+  urlCdn: process.env.NEXT_PUBLIC_URL_CDN ?? '',
+  urlCdnBack: process.env.URL_CDN ?? '',
 };

@@ -74,7 +74,7 @@ export function NavSectionVertical({
         <Accordion>
           <AccordionSummary expandIcon={<Iconify icon="bi:chevron-down" />}>
             <Iconify icon="carbon:settings-adjust" style={{ marginRight: 8 }} />
-            <Typography>Setup Information</Typography>
+            <Typography>Shopper information</Typography>
           </AccordionSummary>
           <AccordionDetails
             sx={{
@@ -106,7 +106,7 @@ export function NavSectionVertical({
                 value={referencia}
                 onChange={(e) => setFieldValue('referencia', e.target.value)}
               />
-              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+              {/* <FormControl variant="standard" sx={{ minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-standard-label">Language</InputLabel>
                 <Select
                   labelId="demo-simple-select-standard-label"
@@ -121,7 +121,7 @@ export function NavSectionVertical({
                   <MenuItem value="eng">English</MenuItem>
                   <MenuItem value="jpn">Japanese</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
             </Stack>
           </AccordionDetails>
         </Accordion>
@@ -179,6 +179,7 @@ export function NavSectionVertical({
                 >
                   <MenuItem value="USD">USD</MenuItem>
                   <MenuItem value="EUR">Euro</MenuItem>
+                  <MenuItem value="VES">Bolivares</MenuItem>
                 </Select>
               </FormControl>
             </Stack>
@@ -215,16 +216,6 @@ export function NavSectionVertical({
                   <MenuItem value="texto">Text</MenuItem>
                 </Select>
               </FormControl>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    id="horizontal"
-                    checked={horizontal}
-                    onChange={(e) => setFieldValue('horizontal', e.target.checked)}
-                  />
-                }
-                label="Horizontal"
-              />
             </Stack>
           </AccordionDetails>
         </Accordion>

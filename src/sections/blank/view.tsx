@@ -178,7 +178,7 @@ export function BlankView({ title = 'Blank' }: Props) {
             >
               <Iconify icon="mdi:robot-outline" sx={{ fontSize: 100, color: '#ACB9C9' }} />
               <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
-                Empieza a configurar tu pasarela
+                Start setting up your gateway
               </Typography>
             </Box>
           )}
