@@ -8,7 +8,9 @@ import {
   MenuItem,
   TextField,
   Accordion,
+  InputLabel,
   Typography,
+  FormControl,
   FormControlLabel,
   AccordionSummary,
   AccordionDetails,
@@ -68,236 +70,260 @@ export function NavSectionVertical({
   return (
     <Stack sx={{ ...cssVars, ...sx, paddingX: 1 }}>
       <Box sx={{ flex: '1 1 auto' }}>
-        {/* Datos Generales */}
+        {/* Setup Information */}
         <Accordion>
           <AccordionSummary expandIcon={<Iconify icon="bi:chevron-down" />}>
             <Iconify icon="carbon:settings-adjust" style={{ marginRight: 8 }} />
-            <Typography>Datos Generales</Typography>
+            <Typography>Setup Information</Typography>
           </AccordionSummary>
           <AccordionDetails
             sx={{
               padding: '2px 10px 15px 10px',
             }}
           >
-            <TextField
-              fullWidth
-              id="email"
-              label="Email"
-              variant="standard"
-              value={email}
-              onChange={(e) => setFieldValue('email', e.target.value)}
-            />
-            <TextField
-              fullWidth
-              id="lukapayId"
-              label="LukaPay ID"
-              variant="standard"
-              value={lukapayId}
-              onChange={(e) => setFieldValue('lukapayId', e.target.value)}
-            />
-            <TextField
-              fullWidth
-              id="referencia"
-              label="Referencia"
-              variant="standard"
-              value={referencia}
-              onChange={(e) => setFieldValue('referencia', e.target.value)}
-            />
-            <Select
-              fullWidth
-              id="idioma"
-              label="Idioma"
-              variant="standard"
-              value={idioma}
-              onChange={(e) => setFieldValue('idioma', e.target.value)}
-            >
-              <MenuItem value="esp">Español</MenuItem>
-              <MenuItem value="eng">Inglés</MenuItem>
-              <MenuItem value="jpn">Japonés</MenuItem>
-            </Select>
+            <Stack spacing={2}>
+              <TextField
+                fullWidth
+                id="email"
+                label="Email"
+                variant="standard"
+                value={email}
+                onChange={(e) => setFieldValue('email', e.target.value)}
+              />
+              <TextField
+                fullWidth
+                id="lukapayId"
+                label="LukaPay ID"
+                variant="standard"
+                value={lukapayId}
+                onChange={(e) => setFieldValue('lukapayId', e.target.value)}
+              />
+              <TextField
+                fullWidth
+                id="reference"
+                label="Reference"
+                variant="standard"
+                value={referencia}
+                onChange={(e) => setFieldValue('referencia', e.target.value)}
+              />
+              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-standard-label">Language</InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  fullWidth
+                  id="language"
+                  label="Language"
+                  variant="standard"
+                  value={idioma}
+                  onChange={(e) => setFieldValue('idioma', e.target.value)}
+                >
+                  <MenuItem value="esp">Spanish</MenuItem>
+                  <MenuItem value="eng">English</MenuItem>
+                  <MenuItem value="jpn">Japanese</MenuItem>
+                </Select>
+              </FormControl>
+            </Stack>
           </AccordionDetails>
         </Accordion>
 
-        {/* Configuración Monetaria */}
+        {/* Currency Format */}
         <Accordion>
           <AccordionSummary expandIcon={<Iconify icon="bi:chevron-down" />}>
             <Iconify icon="mdi:currency-usd" style={{ marginRight: 8 }} />
-            <Typography>Configuración Monetaria</Typography>
+            <Typography>Currency Format</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <TextField
-              fullWidth
-              id="monto"
-              label="Monto"
-              variant="standard"
-              value={strMonto}
-              onChange={(e) => setFieldValue('strMonto', e.target.value)}
-            />
-            <TextField
-              fullWidth
-              id="decimales"
-              label="Cantidad de Decimales"
-              variant="standard"
-              value={strDecimales}
-              onChange={(e) => setFieldValue('strDecimales', e.target.value)}
-            />
-            <TextField
-              fullWidth
-              id="sepMiles"
-              label="Separador Miles"
-              variant="standard"
-              value={sepMiles ?? ''}
-              onChange={(e) => setFieldValue('sepMiles', e.target.value)}
-            />
-            <TextField
-              fullWidth
-              id="sepDecimal"
-              label="Separador Decimal"
-              variant="standard"
-              value={sepDecimal}
-              onChange={(e) => setFieldValue('sepDecimal', e.target.value)}
-            />
-            <Select
-              fullWidth
-              id="moneda"
-              label="Moneda"
-              variant="standard"
-              value={moneda}
-              onChange={(e) => setFieldValue('moneda', e.target.value)}
-            >
-              <MenuItem value="USD">Dólar US</MenuItem>
-              <MenuItem value="EUR">Euro</MenuItem>
-            </Select>
+            <Stack spacing={2}>
+              <TextField
+                fullWidth
+                id="amount"
+                label="Amount"
+                variant="standard"
+                value={strMonto}
+                onChange={(e) => setFieldValue('strMonto', e.target.value)}
+              />
+              <TextField
+                fullWidth
+                id="decimals"
+                label="Number of Decimals"
+                variant="standard"
+                value={strDecimales}
+                onChange={(e) => setFieldValue('strDecimales', e.target.value)}
+              />
+              <TextField
+                fullWidth
+                id="thousandsSeparator"
+                label="Thousands Separator"
+                variant="standard"
+                value={sepMiles ?? ''}
+                onChange={(e) => setFieldValue('sepMiles', e.target.value)}
+              />
+              <TextField
+                fullWidth
+                id="decimalSeparator"
+                label="Decimal Separator"
+                variant="standard"
+                value={sepDecimal}
+                onChange={(e) => setFieldValue('sepDecimal', e.target.value)}
+              />
+              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                <InputLabel id="currency-label">Currency</InputLabel>
+                <Select
+                  labelId="currency-label"
+                  fullWidth
+                  id="currency"
+                  label="Currency"
+                  variant="standard"
+                  value={moneda}
+                  onChange={(e) => setFieldValue('moneda', e.target.value)}
+                >
+                  <MenuItem value="USD">USD</MenuItem>
+                  <MenuItem value="EUR">Euro</MenuItem>
+                </Select>
+              </FormControl>
+            </Stack>
           </AccordionDetails>
         </Accordion>
 
-        {/* Configuración de Estilo */}
+        {/* Styles */}
         <Accordion>
           <AccordionSummary expandIcon={<Iconify icon="bi:chevron-down" />}>
             <Iconify icon="ic:round-color-lens" style={{ marginRight: 8 }} />
-            <Typography>Configuración de Estilo</Typography>
+            <Typography>Styles</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <TextField
-              fullWidth
-              id="color"
-              label="Color"
-              variant="standard"
-              value={color}
-              onChange={(e) => setFieldValue('color', e.target.value)}
-            />
-            <Select
-              fullWidth
-              id="tipoPestanas"
-              variant="standard"
-              label="Tipo de Pestañas"
-              value={seleccion}
-              onChange={(e) => setFieldValue('seleccion', e.target.value)}
-            >
-              <MenuItem value="imagen">Imagen</MenuItem>
-              <MenuItem value="texto">Texto</MenuItem>
-            </Select>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  id="horizontal"
-                  checked={horizontal}
-                  onChange={(e) => setFieldValue('horizontal', e.target.checked)}
-                />
-              }
-              label="Horizontal"
-            />
+            <Stack spacing={2}>
+              <TextField
+                fullWidth
+                id="color"
+                label="Color"
+                variant="standard"
+                value={color}
+                onChange={(e) => setFieldValue('color', e.target.value)}
+              />
+              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                <InputLabel id="tabType-label">Tab Type</InputLabel>
+                <Select
+                  labelId="tabType-label"
+                  fullWidth
+                  id="tabType"
+                  variant="standard"
+                  value={seleccion}
+                  onChange={(e) => setFieldValue('seleccion', e.target.value)}
+                >
+                  <MenuItem value="imagen">Image</MenuItem>
+                  <MenuItem value="texto">Text</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    id="horizontal"
+                    checked={horizontal}
+                    onChange={(e) => setFieldValue('horizontal', e.target.checked)}
+                  />
+                }
+                label="Horizontal"
+              />
+            </Stack>
           </AccordionDetails>
         </Accordion>
 
-        {/* Configuración de Cuotas */}
+        {/* Scheduled Payments Setup */}
         <Accordion>
           <AccordionSummary expandIcon={<Iconify icon="bi:chevron-down" />}>
             <Iconify icon="bx:bx-dollar-circle" style={{ marginRight: 8 }} />
-            <Typography>Configuración de Cuotas</Typography>
+            <Typography>Scheduled Payments Setup</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  id="checkCuotas"
-                  checked={checkCuotas}
-                  onChange={(e) => setFieldValue('checkCuotas', e.target.checked)}
-                />
-              }
-              label="Opciones de Cuotas"
-            />
-            <TextField
-              fullWidth
-              id="fechaCuotas"
-              label="Fecha Final de la Cuota"
-              variant="standard"
-              value={fechaCuotas ?? ''}
-              onChange={(e) => setFieldValue('fechaCuotas', e.target.value)}
-            />
-            <TextField
-              fullWidth
-              id="frecuenciaCuotas"
-              label="Frecuencia"
-              variant="standard"
-              value={frecuenciaCuotas}
-              onChange={(e) => setFieldValue('frecuenciaCuotas', e.target.value)}
-            />
-            <TextField
-              fullWidth
-              id="cantidadCuotas"
-              label="Cantidad de Cuotas"
-              variant="standard"
-              value={cantidadCuotas}
-              onChange={(e) => setFieldValue('cantidadCuotas', e.target.value)}
-            />
-            <TextField
-              fullWidth
-              id="idConfigCuotas"
-              label="ID Config Cuotas"
-              variant="standard"
-              value={idConfigCuotas}
-              onChange={(e) => setFieldValue('idConfigCuotas', e.target.value)}
-            />
+            <Stack spacing={2}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    id="checkInstallments"
+                    checked={checkCuotas}
+                    onChange={(e) => setFieldValue('checkCuotas', e.target.checked)}
+                  />
+                }
+                label="Installment Options"
+              />
+              <TextField
+                fullWidth
+                id="installmentEndDate"
+                label="Installment End Date"
+                variant="standard"
+                value={fechaCuotas ?? ''}
+                onChange={(e) => setFieldValue('fechaCuotas', e.target.value)}
+              />
+              <TextField
+                fullWidth
+                id="installmentFrequency"
+                label="Frequency"
+                variant="standard"
+                value={frecuenciaCuotas}
+                onChange={(e) => setFieldValue('frecuenciaCuotas', e.target.value)}
+              />
+              <TextField
+                fullWidth
+                id="installmentCount"
+                label="Number of Installments"
+                variant="standard"
+                value={cantidadCuotas}
+                onChange={(e) => setFieldValue('cantidadCuotas', e.target.value)}
+              />
+              <TextField
+                fullWidth
+                id="installmentConfigId"
+                label="Installment Config ID"
+                variant="standard"
+                value={idConfigCuotas}
+                onChange={(e) => setFieldValue('idConfigCuotas', e.target.value)}
+              />
+            </Stack>
           </AccordionDetails>
         </Accordion>
 
-        {/* Opciones Avanzadas */}
+        {/* Advanced Settings */}
         <Accordion>
           <AccordionSummary expandIcon={<Iconify icon="bi:chevron-down" />}>
             <Iconify icon="mdi:cog-outline" style={{ marginRight: 8 }} />
-            <Typography>Opciones Avanzadas</Typography>
+            <Typography>Advanced Settings</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Select
-              fullWidth
-              id="terminos"
-              variant="standard"
-              label="Tipo de Término y Condiciones"
-              value={terminos}
-              onChange={(e) => setFieldValue('terminos', e.target.value)}
-            >
-              <MenuItem value="checkbox">Checkbox</MenuItem>
-              <MenuItem value="link">Link</MenuItem>
-            </Select>
-            <TextField
-              fullWidth
-              id="metodos"
-              label="Métodos de Pago"
-              variant="standard"
-              value={metodos}
-              onChange={(e) => setFieldValue('metodos', e.target.value)}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  id="guardarTarjeta"
-                  checked={guardarTarjeta}
-                  onChange={(e) => setFieldValue('guardarTarjeta', e.target.checked)}
-                />
-              }
-              label="Guardar Tarjeta en la Bóveda"
-            />
+            <Stack spacing={2}>
+              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                <InputLabel id="termsType-label">Terms & Conditions Type</InputLabel>
+                <Select
+                  labelId="termsType-label"
+                  fullWidth
+                  id="termsType"
+                  variant="standard"
+                  value={terminos}
+                  onChange={(e) => setFieldValue('terminos', e.target.value)}
+                >
+                  <MenuItem value="checkbox">Checkbox</MenuItem>
+                  <MenuItem value="link">Link</MenuItem>
+                </Select>
+              </FormControl>
+              <TextField
+                fullWidth
+                id="paymentMethods"
+                label="Payment Methods"
+                variant="standard"
+                value={metodos}
+                onChange={(e) => setFieldValue('metodos', e.target.value)}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    id="saveCard"
+                    checked={guardarTarjeta}
+                    onChange={(e) => setFieldValue('guardarTarjeta', e.target.checked)}
+                  />
+                }
+                label="Save Card to Vault"
+              />
+            </Stack>
           </AccordionDetails>
         </Accordion>
       </Box>
@@ -326,7 +352,7 @@ export function NavSectionVertical({
             height: 50,
           }}
         >
-          Actualizar monto
+          Update Amount
         </Button>
       </Box>
     </Stack>
