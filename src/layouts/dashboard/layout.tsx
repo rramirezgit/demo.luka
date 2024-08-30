@@ -97,7 +97,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
               searchbar: false,
               notifications: false,
               workspaces: false,
-              settings: false,
+              settings: true,
             }}
             slots={{
               topArea: (
@@ -185,7 +185,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
           '--layout-transition-easing': 'linear',
           '--layout-transition-duration': '120ms',
           '--layout-nav-mini-width': '88px',
-          '--layout-nav-vertical-width': '450px',
+          '--layout-nav-vertical-width': '420px',
           '--layout-nav-horizontal-height': '64px',
           '--layout-dashboard-content-pt': theme.spacing(1),
           '--layout-dashboard-content-pb': theme.spacing(8),

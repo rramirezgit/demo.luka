@@ -2,12 +2,14 @@ import type { Breakpoint } from '@mui/material/styles';
 import type { NavSectionProps } from 'src/components/nav-section';
 
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import { varAlpha, hideScrollY } from 'src/theme/styles';
 
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
+import ActionFooter from 'src/components/nav-section/vertical/ActionFooter';
 import { NavSectionMini, NavSectionVertical } from 'src/components/nav-section';
 
 // ----------------------------------------------------------------------
@@ -36,14 +38,18 @@ export function NavVertical({
   const renderNavVertical = (
     <>
       {slots?.topArea ?? (
-        <Box sx={{ pl: 3.5, pt: 2.5, pb: 1 }}>
-          <Logo width={120} height={40} />
+        <Box sx={{ p: '30px 35px 24px 35px' }}>
+          <Logo width={83} height={37} />
+          <Typography sx={{ fontSize: '20px', color: 'black', mt: '24px' }}>
+            Demo Gateway
+          </Typography>
         </Box>
       )}
 
-      <Scrollbar fillContent>
-        <NavSectionVertical data={data} sx={{ px: 2, flex: '1 1 auto' }} {...other} />
+      <Scrollbar fillContent sx={{ p: '0px 42px 24px 42px' }}>
+        <NavSectionVertical data={data} sx={{ flex: '1 1 auto' }} {...other} />
       </Scrollbar>
+      <ActionFooter buttonColor="#3b82f6" />
     </>
   );
 
