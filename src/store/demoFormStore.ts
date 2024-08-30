@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 interface CuotasConfig {
   fechaFinal: string | null;
@@ -41,7 +41,7 @@ interface FormState {
 export const useFormStore = create<FormState>((set, get) => ({
   lukaInitialized: false,
   strMonto: '18.03',
-  idioma: 'esp',
+  idioma: 'eng',
   strDecimales: '',
   color: '',
   terminos: '',

@@ -32,9 +32,11 @@ export function LanguagePopover({ data = [], sx, ...other }: LanguagePopoverProp
 
   const [locale, setLocale] = useState<string>(data[0].value);
 
-  const { setFieldValue } = useFormStore();
+  const { setFieldValue, idioma } = useFormStore();
 
-  const currentLang = data.find((lang) => lang.value === locale);
+  const currentLang = idioma
+    ? data.find((lang) => lang.value === idioma)
+    : data.find((lang) => lang.value === locale);
 
   const handleChangeLang = useCallback((newLang: string) => {
     setLocale(newLang);

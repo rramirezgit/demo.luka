@@ -6,7 +6,8 @@ import { Box, IconButton } from '@mui/material';
 import { CONFIG } from 'src/config-global';
 import { useFormStore } from 'src/store/demoFormStore';
 
-import { Iconify } from '../iconify';
+import SvgCel from '../svg/Cel';
+import SvgDesktop from '../svg/Desktop';
 
 const ToggleContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -53,14 +54,26 @@ const ToggleButton = () => {
         onClick={() => handleToggle('desktop')}
         color={selected === 'desktop' ? 'primary' : 'default'}
       >
-        <Iconify icon="mdi:monitor" />
+        <SvgDesktop
+          style={{
+            width: '24px',
+            height: '24px',
+            color: selected === 'desktop' ? '#3b82f6' : '#2F363E',
+          }}
+        />
       </IconButton>
       <Divider />
       <IconButton
         onClick={() => handleToggle('mobile')}
         color={selected === 'mobile' ? 'primary' : 'default'}
       >
-        <Iconify icon="mdi:cellphone" />
+        <SvgCel
+          style={{
+            width: '24px',
+            height: '24px',
+            color: selected === 'mobile' ? '#3b82f6' : '#2F363E',
+          }}
+        />
       </IconButton>
     </ToggleContainer>
   );

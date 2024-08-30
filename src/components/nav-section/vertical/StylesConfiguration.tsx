@@ -17,8 +17,8 @@ import {
   AccordionDetails,
 } from '@mui/material';
 
-import { Styles } from 'src/components/svg';
 import { Iconify } from 'src/components/iconify';
+import SvgStyles from 'src/components/svg/Styles';
 
 const StylesConfiguration: React.FC = () => {
   const [buttonColor, setButtonColor] = useState('#d3d3d3');
@@ -69,7 +69,7 @@ const StylesConfiguration: React.FC = () => {
       <AccordionSummary
         expandIcon={<Iconify icon="fluent:chevron-down-12-regular" width={17} height={17} />}
       >
-        <Styles
+        <SvgStyles
           style={{
             width: 24,
             height: 24,

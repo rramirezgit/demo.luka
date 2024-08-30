@@ -142,7 +142,7 @@ export function LukaLoaderButton() {
       variant="contained"
       onClick={handleLoadClick}
     >
-      Cargar Luka
+      Load Demo
     </Button>
   );
 }

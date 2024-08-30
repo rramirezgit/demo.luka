@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 
 import { Iconify } from 'src/components/iconify';
-import { Advancedsettings } from 'src/components/svg';
+import SvgAdvancedsettings from 'src/components/svg/Advancedsettings';
 
 interface AdvancedSettingsProps {
   formStore: any;
@@ -29,7 +29,7 @@ const AdvancedSettings: React.FC<AdvancedSettingsProps> = ({ formStore }) => (
     <AccordionSummary
       expandIcon={<Iconify icon="fluent:chevron-down-12-regular" width={17} height={17} />}
     >
-      <Advancedsettings style={{ marginRight: 8, width: 24, height: 24 }} />
+      <SvgAdvancedsettings style={{ marginRight: 8, width: 24, height: 24 }} />
       <Typography>Advanced Settings</Typography>
     </AccordionSummary>
     <AccordionDetails>

@@ -11,7 +11,7 @@ import { Typography } from '@mui/material';
 import { useAuthStore } from 'src/store/loginStore';
 import { useFormStore } from 'src/store/demoFormStore';
 
-import { Iconify } from 'src/components/iconify';
+import SvgBot from 'src/components/svg/Bot';
 import { SplashScreen } from 'src/components/loading-screen';
 
 // ----------------------------------------------------------------------
@@ -39,8 +39,8 @@ export function BlankView({ title = 'Blank' }: Props) {
         <Box
           sx={{
             position: 'relative',
-            width: 340, // Ajusta el ancho según tus necesidades
-            height: 650, // Ajusta la altura según tus necesidades
+            width: 360, // Ajusta el ancho según tus necesidades
+            height: 680, // Ajusta la altura según tus necesidades
             borderRadius: '44.06px',
             backgroundColor: '#F6F7FB',
             boxShadow: 'inset 0 0 8px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(0, 0, 0, 0.1)',
@@ -111,9 +111,25 @@ export function BlankView({ title = 'Blank' }: Props) {
                 },
               }}
             >
-              {/* Aquí va tu contenido */}
-
-              <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
+              {!lukaInitialized && (
+                <Box
+                  sx={{
+                    height: '450px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
+                  <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
+                    Start setting up your gateway
+                  </Typography>
+                </Box>
+              )}
+              <div style={{ width: '100%', height: '10%', padding: 2 }}>
+                <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
+              </div>
             </Box>
           </Box>
         </Box>
@@ -121,15 +137,16 @@ export function BlankView({ title = 'Blank' }: Props) {
         <Box
           sx={{
             width: '100%',
+            minHeight: 'calc(100% - 35px)',
+            height: 'max-content',
             maxWidth: 886,
-            height: 709,
             borderRadius: 2,
             bgcolor: 'white',
             boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
             overflow: 'hidden',
             position: 'relative',
+            mb: 5,
             mx: 'auto', // Center horizontally
-            mt: 5, // Optional: Adjust the top margin
           }}
         >
           {/* Barra superior */}
@@ -174,15 +191,14 @@ export function BlankView({ title = 'Blank' }: Props) {
           {!lukaInitialized && (
             <Box
               sx={{
-                height: 'calc(100% - 35px)',
+                height: '450px',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                bgcolor: '#F6F7FB',
               }}
             >
-              <Iconify icon="mdi:robot-outline" sx={{ fontSize: 100, color: '#ACB9C9' }} />
+              <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
               <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
                 Start setting up your gateway
               </Typography>

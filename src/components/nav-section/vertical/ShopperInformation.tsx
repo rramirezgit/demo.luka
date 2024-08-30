@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 import { Iconify } from 'src/components/iconify';
-import { Shopperinfo } from 'src/components/svg';
+import SvgShopperinfo from 'src/components/svg/Shopperinfo';
 
 interface ShopperInformationProps {
   formStore: any;
@@ -23,7 +23,7 @@ const ShopperInformation: React.FC<ShopperInformationProps> = ({ formStore }) =>
     <AccordionSummary
       expandIcon={<Iconify icon="fluent:chevron-down-12-regular" width={17} height={17} />}
     >
-      <Shopperinfo style={{ marginRight: 8, width: 24, height: 24 }} />
+      <SvgShopperinfo style={{ marginRight: 8, width: 24, height: 24 }} />
       <Typography>Shopper information</Typography>
     </AccordionSummary>
     <AccordionDetails sx={{ padding: '2px 10px 15px 10px' }}>
