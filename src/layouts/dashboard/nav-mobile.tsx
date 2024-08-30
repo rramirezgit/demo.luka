@@ -10,6 +10,7 @@ import { usePathname } from 'src/routes/hooks';
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
 import { NavSectionVertical } from 'src/components/nav-section';
+import ActionFooter from 'src/components/nav-section/vertical/ActionFooter';
 
 // ----------------------------------------------------------------------
 
@@ -54,6 +55,8 @@ export function NavMobile({ data, open, onClose, slots, sx, ...other }: NavMobil
       <Scrollbar fillContent>
         <NavSectionVertical data={data} sx={{ px: 2, flex: '1 1 auto' }} {...other} />
       </Scrollbar>
+
+      <ActionFooter buttonColor="#3b82f6" />
 
       {slots?.bottomArea}
     </Drawer>
