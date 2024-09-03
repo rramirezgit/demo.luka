@@ -20,6 +20,7 @@ export function LukaLoaderButton() {
     moneda,
     seleccion,
     terminos,
+    estilos,
     idioma,
     metodos,
     sepDecimal,
@@ -65,7 +66,8 @@ export function LukaLoaderButton() {
       guardarEnBoveda: guardarTarjeta,
       horizontal,
       estilos: {
-        color: '#0516B1',
+        ...estilos,
+        color: estilos.botton?.color || '#0516B1',
       },
     },
     additionalData: {
@@ -112,7 +114,8 @@ export function LukaLoaderButton() {
         guardarEnBoveda: guardarTarjeta,
         horizontal,
         estilos: {
-          color: '#0516B1',
+          ...estilos,
+          color: estilos.botton?.color || '#0516B1',
         },
       },
       additionalData: {

@@ -8,6 +8,35 @@ interface CuotasConfig {
   idConfig: string;
 }
 
+interface Estilos {
+  color?: string;
+  input?: {
+    borderColor?: string;
+    backgroundColor?: string;
+    color?: string;
+    fontSize?: number;
+    radio?: number;
+    height?: number;
+    weight?: number;
+  };
+  botton?: {
+    backgroundColor?: string;
+    color?: string;
+    radio?: number;
+    fontSize?: number;
+    height?: number;
+  };
+  fontFamily?: string;
+  borderPadding?: string;
+  formBorder?: string;
+  carrusel?: {
+    borderRadius?: number;
+    border?: string;
+    borderColor?: string;
+    boxShadow?: string;
+  };
+}
+
 interface FormState {
   lukaInitialized: boolean;
   strMonto: string;
@@ -31,8 +60,9 @@ interface FormState {
   cantidadCuotas: string;
   idConfigCuotas: string;
   objCuotasConfig: CuotasConfig | null;
-  moneda: string; // Nueva variable
-  horizontal: boolean; // Nueva variable
+  moneda: string;
+  horizontal: boolean;
+  estilos: Estilos; // Nueva variable para estilos
   setFieldValue: (field: keyof FormState, value: any) => void;
   validateAndSetMonto: () => boolean;
   setLukaInitialized: (value: boolean) => void;
@@ -63,6 +93,7 @@ export const useFormStore = create<FormState>((set, get) => ({
   objCuotasConfig: null,
   moneda: 'USD', // Valor predeterminado para la moneda
   horizontal: false, // Valor predeterminado para la disposición horizontal
+  estilos: {}, // Inicialización de la nueva variable para estilos
 
   setFieldValue: (field, value) => set({ [field]: value }),
 

@@ -8,7 +8,6 @@ import {
   MenuItem,
   Checkbox,
   Accordion,
-  TextField,
   Typography,
   InputLabel,
   FormControl,
@@ -48,14 +47,6 @@ const AdvancedSettings: React.FC<AdvancedSettingsProps> = ({ formStore }) => (
             <MenuItem value="link">Link</MenuItem>
           </Select>
         </FormControl>
-        <TextField
-          fullWidth
-          id="paymentMethods"
-          label="Payment Methods"
-          variant="standard"
-          value={formStore.metodos}
-          onChange={(e) => formStore.setFieldValue('metodos', e.target.value)}
-        />
         <FormControlLabel
           control={
             <Checkbox

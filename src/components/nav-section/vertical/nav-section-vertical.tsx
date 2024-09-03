@@ -12,6 +12,7 @@ import CurrencySelect from './CurrencySelect';
 import { navSectionCssVars } from '../css-vars';
 import AdvancedSettings from './AdvancedSettings';
 import ShopperInformation from './ShopperInformation';
+import StylesConfiguration from './StylesConfiguration';
 import PaymentMethodsSelect from './PaymentMethodsSelect';
 import ScheduledPaymentsSetup from './ScheduledPaymentsSetup';
 
@@ -36,12 +37,25 @@ export const NavSectionVertical: React.FC<NavSectionProps> = ({
   return (
     <Stack sx={{ ...cssVars, ...sx }}>
       <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        {/* Amount, Currency, and Payment Solutions */}
         <AmountField value={formStore.strMonto} setFieldValue={formStore.setFieldValue} />
         <CurrencySelect value={formStore.moneda} setFieldValue={formStore.setFieldValue} />
         <PaymentMethodsSelect value={formStore.metodos} setFieldValue={formStore.setFieldValue} />
+
+        {/* General Settings and Currency Format */}
+        {/* Aquí podrías agregar una sección de configuraciones generales si es necesario */}
+        {/* Currency Format podría estar aquí si lo manejas como una sección específica */}
+
+        {/* Styles Configuration */}
+        <StylesConfiguration />
+
+        {/* Shopper Information */}
         <ShopperInformation formStore={formStore} />
-        {/* <StylesConfiguration /> */}
+
+        {/* Scheduled Payments Setup */}
         <ScheduledPaymentsSetup formStore={formStore} />
+
+        {/* Advanced Settings */}
         <AdvancedSettings formStore={formStore} />
       </Box>
     </Stack>

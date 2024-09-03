@@ -1,4 +1,4 @@
-import type { Breakpoint } from '@mui/material/styles';
+import type { Breakpoint } from '@mui/material';
 import type { NavSectionProps } from 'src/components/nav-section';
 
 import Box from '@mui/material/Box';
@@ -40,8 +40,26 @@ export function NavVertical({
       {slots?.topArea ?? (
         <Box sx={{ p: '30px 35px 24px 35px' }}>
           <Logo width={83} height={37} />
-          <Typography sx={{ fontSize: '20px', color: 'black', mt: '24px' }}>
-            Demo Gateway
+          <Typography sx={{ fontSize: '16px', color: 'black', mt: '24px', fontWeight: 700 }}>
+            Embedded Payment Gateway Solution:
+          </Typography>
+          {/* <Typography sx={{ fontSize: '16px', color: 'black', mt: '14px' }}>
+            Embedded Payment Gateway Solution:
+          </Typography> */}
+
+          {/* Nuevo texto agregado aquí */}
+          <Typography
+            sx={{
+              fontSize: '14px',
+              color: 'black',
+              mt: '16px',
+              bgcolor: theme.palette.grey[100],
+              p: 2,
+              fontWeight: 400,
+              borderRadius: '8px',
+            }}
+          >
+            Start accepting all payment methods on your website with a single integration.
           </Typography>
         </Box>
       )}
@@ -94,16 +112,6 @@ export function NavVertical({
         ...sx,
       }}
     >
-      {/* <NavToggleButton
-        isNavMini={isNavMini}
-        onClick={onToggleNav}
-        sx={{
-          display: 'none',
-          [theme.breakpoints.up(layoutQuery)]: {
-            display: 'inline-flex',
-          },
-        }}
-      /> */}
       {isNavMini ? renderNavMini : renderNavVertical}
     </Box>
   );

@@ -17,23 +17,17 @@ import {
   AccordionDetails,
 } from '@mui/material';
 
+import { useFormStore } from 'src/store/demoFormStore';
+
 import { Iconify } from 'src/components/iconify';
 import SvgStyles from 'src/components/svg/Styles';
 
 const StylesConfiguration: React.FC = () => {
-  const [buttonColor, setButtonColor] = useState('#d3d3d3');
+  const { setFieldValue, estilos } = useFormStore();
   const [selectedElement, setSelectedElement] = useState('Input');
-  const [borderColor, setBorderColor] = useState('#d3d3d3');
-  const [backgroundColor, setBackgroundColor] = useState('#d3d3d3');
-  const [textColor, setTextColor] = useState('#d3d3d3');
-  const [radius, setRadius] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [fontSize, setFontSize] = useState(0);
-  const [buttonHeight, setButtonHeight] = useState(0);
-  const [fontUrl, setFontUrl] = useState('font.google.com');
-  const [fontFamily, setFontFamily] = useState('Font');
   const [colorPickerAnchor, setColorPickerAnchor] = useState<HTMLElement | null>(null);
   const [activeColorPicker, setActiveColorPicker] = useState<string | null>(null);
+  const [fontUrl, setFontUrl] = useState('');
 
   const handleColorClick = (colorType: string) => (event: React.MouseEvent<HTMLElement>) => {
     setColorPickerAnchor(event.currentTarget);
@@ -46,22 +40,97 @@ const StylesConfiguration: React.FC = () => {
   };
 
   const handleColorChange = (color: any) => {
+    const colorHex = color.hex;
+    const updatedStyles = { ...estilos };
+
     switch (activeColorPicker) {
       case 'button':
-        setButtonColor(color.hex);
+        updatedStyles.botton = {
+          ...updatedStyles.botton,
+          backgroundColor: colorHex,
+          color: colorHex,
+        };
         break;
       case 'border':
-        setBorderColor(color.hex);
+        updatedStyles.input = {
+          ...updatedStyles.input,
+          borderColor: colorHex,
+        };
         break;
       case 'background':
-        setBackgroundColor(color.hex);
+        updatedStyles.input = {
+          ...updatedStyles.input,
+          backgroundColor: colorHex,
+        };
         break;
       case 'text':
-        setTextColor(color.hex);
+        updatedStyles.input = {
+          ...updatedStyles.input,
+          color: colorHex,
+        };
         break;
       default:
         break;
     }
+
+    setFieldValue('estilos', updatedStyles);
+  };
+
+  const handleSliderChange = (type: string) => (_: any, newValue: number | number[]) => {
+    const value = newValue as number;
+    const updatedStyles = { ...estilos };
+
+    switch (type) {
+      case 'radius':
+        updatedStyles.input = {
+          ...updatedStyles.input,
+          radio: value,
+        };
+        break;
+      case 'weight':
+        updatedStyles.input = {
+          ...updatedStyles.input,
+          weight: value,
+        };
+        break;
+      case 'fontSize':
+        updatedStyles.input = {
+          ...updatedStyles.input,
+          fontSize: value,
+        };
+        break;
+      case 'height':
+        updatedStyles.input = {
+          ...updatedStyles.input,
+          height: value,
+        };
+        break;
+      case 'buttonHeight':
+        updatedStyles.botton = {
+          ...updatedStyles.botton,
+          height: value,
+        };
+        break;
+      default:
+        break;
+    }
+
+    setFieldValue('estilos', updatedStyles);
+  };
+
+  const handleTextFieldChange = (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const updatedStyles = { ...estilos };
+
+    if (field === 'fontFamily') {
+      updatedStyles.fontFamily = value;
+    }
+
+    if (field === 'fontUrl') {
+      setFontUrl(value);
+    }
+
+    setFieldValue('estilos', updatedStyles);
   };
 
   return (
@@ -81,14 +150,14 @@ const StylesConfiguration: React.FC = () => {
       <AccordionDetails>
         <Stack spacing={2}>
           <FormControl variant="standard" sx={{ minWidth: 120 }}>
-            <InputLabel>Selecciona que elemento editar</InputLabel>
+            <InputLabel>Select element to edit</InputLabel>
             <Select
               value={selectedElement}
               onChange={(e) => setSelectedElement(e.target.value as string)}
             >
               <MenuItem value="Input">Input</MenuItem>
               <MenuItem value="Font">Font</MenuItem>
-              <MenuItem value="Button">Botón</MenuItem>
+              <MenuItem value="Button">Button</MenuItem>
             </Select>
           </FormControl>
 
@@ -96,42 +165,28 @@ const StylesConfiguration: React.FC = () => {
             <>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Typography variant="subtitle2" sx={{ mr: 2 }}>
-                  Color de botón
+                  Button Color
                 </Typography>
                 <Box
                   sx={{
                     width: 24,
                     height: 24,
-                    bgcolor: buttonColor,
+                    bgcolor: estilos.botton?.backgroundColor || '#d3d3d3',
                     borderRadius: '50%',
                     cursor: 'pointer',
                     border: '1px solid #000',
                   }}
                   onClick={handleColorClick('button')}
                 />
+
                 <Typography variant="subtitle2" sx={{ ml: 4 }}>
-                  Color
+                  Text
                 </Typography>
                 <Box
                   sx={{
                     width: 24,
                     height: 24,
-                    bgcolor: buttonColor,
-                    borderRadius: '50%',
-                    cursor: 'pointer',
-                    border: '1px solid #000',
-                    ml: 2,
-                  }}
-                  onClick={handleColorClick('button')}
-                />
-                <Typography variant="subtitle2" sx={{ ml: 4 }}>
-                  Texto
-                </Typography>
-                <Box
-                  sx={{
-                    width: 24,
-                    height: 24,
-                    bgcolor: textColor,
+                    bgcolor: estilos.input?.color || '#d3d3d3',
                     borderRadius: '50%',
                     cursor: 'pointer',
                     border: '1px solid #000',
@@ -140,10 +195,10 @@ const StylesConfiguration: React.FC = () => {
                   onClick={handleColorClick('text')}
                 />
               </Box>
-              <Typography variant="subtitle2">Radio</Typography>
+              <Typography variant="subtitle2">Radius</Typography>
               <Slider
-                value={radius}
-                onChange={(_, newValue) => setRadius(newValue as number)}
+                value={estilos.input?.radio || 0}
+                onChange={handleSliderChange('radius')}
                 aria-labelledby="radius-slider"
                 valueLabelDisplay="auto"
                 min={0}
@@ -151,17 +206,17 @@ const StylesConfiguration: React.FC = () => {
               />
               <Typography variant="subtitle2">Size</Typography>
               <Slider
-                value={fontSize}
-                onChange={(_, newValue) => setFontSize(newValue as number)}
+                value={estilos.input?.fontSize || 0}
+                onChange={handleSliderChange('fontSize')}
                 aria-labelledby="size-slider"
                 valueLabelDisplay="auto"
                 min={0}
                 max={30}
               />
-              <Typography variant="subtitle2">Alto</Typography>
+              <Typography variant="subtitle2">Height</Typography>
               <Slider
-                value={buttonHeight}
-                onChange={(_, newValue) => setButtonHeight(newValue as number)}
+                value={estilos.botton?.height || 0}
+                onChange={handleSliderChange('buttonHeight')}
                 aria-labelledby="height-slider"
                 valueLabelDisplay="auto"
                 min={0}
@@ -174,13 +229,13 @@ const StylesConfiguration: React.FC = () => {
             <>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Typography variant="subtitle2" sx={{ mr: 2 }}>
-                  Borde
+                  Border
                 </Typography>
                 <Box
                   sx={{
                     width: 24,
                     height: 24,
-                    bgcolor: borderColor,
+                    bgcolor: estilos.input?.borderColor || '#d3d3d3',
                     borderRadius: '50%',
                     cursor: 'pointer',
                     border: '1px solid #000',
@@ -188,13 +243,13 @@ const StylesConfiguration: React.FC = () => {
                   onClick={handleColorClick('border')}
                 />
                 <Typography variant="subtitle2" sx={{ mx: 2 }}>
-                  Fondo
+                  Background
                 </Typography>
                 <Box
                   sx={{
                     width: 24,
                     height: 24,
-                    bgcolor: backgroundColor,
+                    bgcolor: estilos.input?.backgroundColor || '#d3d3d3',
                     borderRadius: '50%',
                     cursor: 'pointer',
                     border: '1px solid #000',
@@ -202,13 +257,13 @@ const StylesConfiguration: React.FC = () => {
                   onClick={handleColorClick('background')}
                 />
                 <Typography variant="subtitle2" sx={{ mx: 2 }}>
-                  Texto
+                  Text
                 </Typography>
                 <Box
                   sx={{
                     width: 24,
                     height: 24,
-                    bgcolor: textColor,
+                    bgcolor: estilos.input?.color || '#d3d3d3',
                     borderRadius: '50%',
                     cursor: 'pointer',
                     border: '1px solid #000',
@@ -216,10 +271,10 @@ const StylesConfiguration: React.FC = () => {
                   onClick={handleColorClick('text')}
                 />
               </Box>
-              <Typography variant="subtitle2">Radio</Typography>
+              <Typography variant="subtitle2">Radius</Typography>
               <Slider
-                value={radius}
-                onChange={(_, newValue) => setRadius(newValue as number)}
+                value={estilos.input?.radio || 0}
+                onChange={handleSliderChange('radius')}
                 aria-labelledby="radius-slider"
                 valueLabelDisplay="auto"
                 min={0}
@@ -227,17 +282,17 @@ const StylesConfiguration: React.FC = () => {
               />
               <Typography variant="subtitle2">Weight</Typography>
               <Slider
-                value={weight}
-                onChange={(_, newValue) => setWeight(newValue as number)}
+                value={estilos.input?.weight || 0}
+                onChange={handleSliderChange('weight')}
                 aria-labelledby="weight-slider"
                 valueLabelDisplay="auto"
                 min={0}
                 max={10}
               />
-              <Typography variant="subtitle2">Texto</Typography>
+              <Typography variant="subtitle2">Text</Typography>
               <Slider
-                value={fontSize}
-                onChange={(_, newValue) => setFontSize(newValue as number)}
+                value={estilos.input?.fontSize || 0}
+                onChange={handleSliderChange('fontSize')}
                 aria-labelledby="font-size-slider"
                 valueLabelDisplay="auto"
                 min={0}
@@ -253,15 +308,15 @@ const StylesConfiguration: React.FC = () => {
                 margin="normal"
                 label="Font URL"
                 value={fontUrl}
-                onChange={(e) => setFontUrl(e.target.value)}
+                onChange={handleTextFieldChange('fontUrl')}
                 variant="standard"
               />
               <TextField
                 fullWidth
                 margin="normal"
                 label="Font Family"
-                value={fontFamily}
-                onChange={(e) => setFontFamily(e.target.value)}
+                value={estilos.fontFamily || ''}
+                onChange={handleTextFieldChange('fontFamily')}
                 variant="standard"
               />
             </>
@@ -286,12 +341,12 @@ const StylesConfiguration: React.FC = () => {
         <SketchPicker
           color={
             activeColorPicker === 'button'
-              ? buttonColor
+              ? estilos.botton?.backgroundColor || '#d3d3d3'
               : activeColorPicker === 'border'
-                ? borderColor
+                ? estilos.input?.borderColor || '#d3d3d3'
                 : activeColorPicker === 'background'
-                  ? backgroundColor
-                  : textColor
+                  ? estilos.input?.backgroundColor || '#d3d3d3'
+                  : estilos.input?.color || '#d3d3d3'
           }
           onChangeComplete={handleColorChange}
         />
