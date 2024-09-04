@@ -57,6 +57,16 @@ const AdvancedSettings: React.FC<AdvancedSettingsProps> = ({ formStore }) => (
           }
           label="Save Card to Vault"
         />
+        <FormControlLabel
+          control={
+            <Checkbox
+              id="verticalLayout"
+              checked={formStore.horizontal}
+              onChange={(e) => formStore.setFieldValue('horizontal', e.target.checked)}
+            />
+          }
+          label="Vertical layout"
+        />
       </Stack>
     </AccordionDetails>
   </Accordion>

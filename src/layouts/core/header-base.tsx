@@ -8,6 +8,8 @@ import { styled, useTheme } from '@mui/material/styles';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { useFormStore } from 'src/store/demoFormStore';
+
 import { Logo } from 'src/components/logo';
 import ToggleButton from 'src/components/demo/toggle-btn';
 
@@ -112,6 +114,8 @@ export function HeaderBase({
   ...other
 }: HeaderBaseProps) {
   const theme = useTheme();
+
+  const { resetStore, lukaInitialized } = useFormStore();
 
   return (
     <HeaderSection

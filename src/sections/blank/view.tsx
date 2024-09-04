@@ -23,7 +23,7 @@ type Props = {
 export function BlankView({ title = 'Blank' }: Props) {
   const { performLogin, loading } = useAuthStore();
 
-  const { lukaInitialized, horizontal } = useFormStore();
+  const { lukaInitialized, horizontalLayout } = useFormStore();
 
   useEffect(() => {
     performLogin();
@@ -35,7 +35,7 @@ export function BlankView({ title = 'Blank' }: Props) {
 
   return (
     <>
-      {horizontal ? (
+      {horizontalLayout ? (
         <Box
           sx={{
             position: 'relative',
@@ -45,7 +45,7 @@ export function BlankView({ title = 'Blank' }: Props) {
             backgroundColor: '#F6F7FB',
             boxShadow: 'inset 0 0 8px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(0, 0, 0, 0.1)',
             margin: 'auto', // Centrado en el contenedor padre
-            mt: 5, // Margen superior
+            mt: 5,
             overflow: 'hidden', // Ocultar desbordamientos
           }}
         >
@@ -140,6 +140,7 @@ export function BlankView({ title = 'Blank' }: Props) {
             minHeight: 'calc(100% - 35px)',
             height: 'max-content',
             maxWidth: 886,
+            mt: 5,
             borderRadius: 2,
             bgcolor: 'white',
             boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',

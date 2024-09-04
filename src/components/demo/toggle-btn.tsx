@@ -30,12 +30,12 @@ const Divider = styled('div')(({ theme }) => ({
 const ToggleButton = () => {
   const [selected, setSelected] = useState<'mobile' | 'desktop'>('desktop');
 
-  const { setFieldValue, horizontal } = useFormStore();
+  const { setFieldValue, horizontalLayout, lukaInitialized } = useFormStore();
   const { urlCdn } = CONFIG;
   const handleToggle = (option: 'mobile' | 'desktop') => {
     setSelected(option);
     const isHorizontal = option === 'mobile';
-    setFieldValue('horizontal', isHorizontal);
+    setFieldValue('horizontalLayout', isHorizontal);
     const html = document.getElementById('container-luka-demo');
     if (html) {
       html.innerHTML = '';
@@ -43,10 +43,12 @@ const ToggleButton = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      // document.getElementById('luka-loader-btn')?.click();
-    }, 1000);
-  }, [horizontal]);
+    if (lukaInitialized) {
+      setTimeout(() => {
+        document.getElementById('luka-loader-btn')?.click();
+      }, 100);
+    }
+  }, [horizontalLayout, lukaInitialized]);
 
   return (
     <ToggleContainer>

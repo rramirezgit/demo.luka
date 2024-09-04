@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import isEqual from 'lodash/isEqual'; // Importa lodash para comparar objetos
 
 interface CuotasConfig {
   fechaFinal: string | null;
@@ -8,7 +9,7 @@ interface CuotasConfig {
   idConfig: string;
 }
 
-interface Estilos {
+export interface Estilos {
   color?: string;
   input?: {
     borderColor?: string;
@@ -40,6 +41,7 @@ interface Estilos {
 interface FormState {
   lukaInitialized: boolean;
   strMonto: string;
+  horizontalLayout: boolean;
   idioma: 'esp' | 'eng' | 'jpn';
   strDecimales: string;
   color: string;
@@ -62,13 +64,25 @@ interface FormState {
   objCuotasConfig: CuotasConfig | null;
   moneda: string;
   horizontal: boolean;
-  estilos: Estilos; // Nueva variable para estilos
+  estilos: Estilos;
+  isModified: boolean;
   setFieldValue: (field: keyof FormState, value: any) => void;
+  resetStore: () => void;
   validateAndSetMonto: () => boolean;
   setLukaInitialized: (value: boolean) => void;
+  checkIfModified: () => void; // Agrega checkIfModified a la interfaz
 }
 
-export const useFormStore = create<FormState>((set, get) => ({
+const initialState: Omit<
+  FormState,
+  | 'setFieldValue'
+  | 'resetStore'
+  | 'validateAndSetMonto'
+  | 'setLukaInitialized'
+  | 'isModified'
+  | 'checkIfModified'
+> = {
+  horizontalLayout: false,
   lukaInitialized: false,
   strMonto: '18.03',
   idioma: 'eng',
@@ -91,12 +105,45 @@ export const useFormStore = create<FormState>((set, get) => ({
   cantidadCuotas: '',
   idConfigCuotas: '',
   objCuotasConfig: null,
-  moneda: 'USD', // Valor predeterminado para la moneda
-  horizontal: false, // Valor predeterminado para la disposición horizontal
-  estilos: {}, // Inicialización de la nueva variable para estilos
+  moneda: 'USD',
+  horizontal: false,
+  estilos: {
+    color: '#0516b1',
+    input: {
+      borderColor: '#ced4da',
+      backgroundColor: 'white',
+      color: 'black',
+      fontSize: 12,
+      radio: 2,
+      height: 40,
+      weight: 1,
+    },
+    botton: {
+      backgroundColor: '#0516b1',
+      color: 'white',
+      radio: 0,
+      fontSize: 16,
+      height: 50,
+    },
+    fontFamily: 'Montserrat',
+    borderPadding: '1.5rem',
+    formBorder: 'solid 1px #dedddd',
+    carrusel: {
+      borderRadius: 2,
+      border: '1px solid',
+      borderColor: '#dedddd',
+      boxShadow: 'none',
+    },
+  },
+};
 
-  setFieldValue: (field, value) => set({ [field]: value }),
-
+export const useFormStore = create<FormState>((set, get) => ({
+  ...initialState,
+  isModified: false,
+  setFieldValue: (field, value) => {
+    set((state) => ({ ...state, [field]: value }));
+    get().checkIfModified(); // Llama a checkIfModified después de cambiar el estado
+  },
   validateAndSetMonto: () => {
     const { strMonto, guardarTarjeta } = get();
     if (!strMonto) {
@@ -109,8 +156,23 @@ export const useFormStore = create<FormState>((set, get) => ({
       return false;
     }
     set({ strMonto: monto.toString() });
+    get().checkIfModified(); // Llama a checkIfModified después de cambiar el estado
     return true;
   },
-
-  setLukaInitialized: (value: boolean) => set({ lukaInitialized: value }),
+  setLukaInitialized: (value: boolean) => {
+    set({ lukaInitialized: value });
+    get().checkIfModified(); // Llama a checkIfModified después de cambiar el estado
+  },
+  resetStore: () => {
+    set(initialState);
+    set({ isModified: false }); // Resetea isModified a false
+  },
+  checkIfModified: () => {
+    const currentState = get();
+    const isModified = !isEqual(currentState, {
+      ...initialState,
+      isModified: currentState.isModified,
+    });
+    set({ isModified });
+  },
 }));

@@ -2,12 +2,14 @@ import type { Breakpoint } from '@mui/material';
 import type { NavSectionProps } from 'src/components/nav-section';
 
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { Badge, Tooltip, IconButton, Typography } from '@mui/material';
 
+import { useFormStore } from 'src/store/demoFormStore';
 import { varAlpha, hideScrollY } from 'src/theme/styles';
 
 import { Logo } from 'src/components/logo';
+import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import ActionFooter from 'src/components/nav-section/vertical/ActionFooter';
 import { NavSectionMini, NavSectionVertical } from 'src/components/nav-section';
@@ -35,11 +37,35 @@ export function NavVertical({
 }: NavVerticalProps) {
   const theme = useTheme();
 
+  const { resetStore, isModified } = useFormStore();
+
   const renderNavVertical = (
     <>
       {slots?.topArea ?? (
         <Box sx={{ p: '30px 35px 24px 35px' }}>
-          <Logo width={83} height={37} />
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Logo width={83} height={37} />
+            <Tooltip title="Reset">
+              <IconButton
+                onClick={() => {
+                  const lib = document.querySelector('#container-luka-demo');
+                  if (lib) {
+                    lib.innerHTML = '';
+                  }
+                  resetStore();
+                }}
+              >
+                <Badge color="error" variant="dot" invisible={!isModified}>
+                  <Iconify icon="solar:restart-bold" />
+                </Badge>
+              </IconButton>
+            </Tooltip>
+          </Box>
           <Typography sx={{ fontSize: '16px', color: 'black', mt: '24px', fontWeight: 700 }}>
             Embedded Payment Gateway Solution:
           </Typography>

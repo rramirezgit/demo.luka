@@ -67,7 +67,7 @@ export function LukaLoaderButton() {
       horizontal,
       estilos: {
         ...estilos,
-        color: estilos.botton?.color || '#0516B1',
+        color: '#0516B1',
       },
     },
     additionalData: {
@@ -115,7 +115,7 @@ export function LukaLoaderButton() {
         horizontal,
         estilos: {
           ...estilos,
-          color: estilos.botton?.color || '#0516B1',
+          color: '#0516B1',
         },
       },
       additionalData: {
