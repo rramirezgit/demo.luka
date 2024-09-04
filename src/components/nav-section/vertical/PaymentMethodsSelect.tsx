@@ -14,9 +14,7 @@ interface PaymentMethod {
 }
 
 interface PaymentMethodsSelectProps {
-  value: string;
   setFieldValue: any;
-  currency: string; // Nueva prop para recibir la moneda
 }
 
 const paymentMethodsByCurrency: any = {
@@ -165,7 +163,7 @@ const paymentMethodsByCurrency: any = {
   ],
 };
 
-const PaymentMethodsSelect: React.FC<PaymentMethodsSelectProps> = ({ value, setFieldValue }) => {
+const PaymentMethodsSelect: React.FC<PaymentMethodsSelectProps> = ({ setFieldValue }) => {
   const [paymentMethodsOptions, setPaymentMethodsOptions] = useState<PaymentMethod[]>([]);
   const [selectedPaymentMethods, setSelectedPaymentMethods] = useState<PaymentMethod[]>([]);
   const { moneda } = useFormStore();

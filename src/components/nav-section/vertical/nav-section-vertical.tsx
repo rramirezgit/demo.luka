@@ -40,7 +40,7 @@ export const NavSectionVertical: React.FC<NavSectionProps> = ({
         {/* Amount, Currency, and Payment Solutions */}
         <AmountField value={formStore.strMonto} setFieldValue={formStore.setFieldValue} />
         <CurrencySelect value={formStore.moneda} setFieldValue={formStore.setFieldValue} />
-        <PaymentMethodsSelect value={formStore.metodos} setFieldValue={formStore.setFieldValue} />
+        <PaymentMethodsSelect setFieldValue={formStore.setFieldValue} />
 
         {/* General Settings and Currency Format */}
         {/* Aquí podrías agregar una sección de configuraciones generales si es necesario */}
