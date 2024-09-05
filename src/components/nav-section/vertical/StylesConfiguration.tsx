@@ -7,6 +7,7 @@ import {
   Slider,
   Select,
   Popover,
+  Checkbox,
   MenuItem,
   Accordion,
   Typography,
@@ -14,6 +15,7 @@ import {
   FormControl,
   AccordionSummary,
   AccordionDetails,
+  FormControlLabel,
 } from '@mui/material';
 
 import { useFormStore } from 'src/store/demoFormStore';
@@ -24,7 +26,7 @@ import SvgStyles from 'src/components/svg/Styles';
 import useSetStyles from './useStyles';
 
 const StylesConfiguration: React.FC = () => {
-  const { setFieldValue, estilos } = useFormStore();
+  const { setFieldValue, estilos, horizontal } = useFormStore();
   const [selectedElement, setSelectedElement] = useState('Input');
   const [colorPickerAnchor, setColorPickerAnchor] = useState<HTMLElement | null>(null);
   const [activeColorPicker, setActiveColorPicker] = useState<string | null>(null);
@@ -167,10 +169,20 @@ const StylesConfiguration: React.FC = () => {
             marginRight: 8,
           }}
         />
-        <Typography>Styles</Typography>
+        <Typography>Styles & Format</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Stack spacing={2}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="verticalLayout"
+                checked={horizontal}
+                onChange={(e) => setFieldValue('horizontal', e.target.checked)}
+              />
+            }
+            label="Vertical layout"
+          />
           <FormControl variant="standard" sx={{ minWidth: 120 }}>
             <InputLabel>Select element to edit</InputLabel>
             <Select
@@ -249,7 +261,7 @@ const StylesConfiguration: React.FC = () => {
           {selectedElement === 'Input' && (
             <>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Typography variant="subtitle2" sx={{ mr: 2 }}>
+                <Typography variant="subtitle2" sx={{ mr: 1 }}>
                   Border
                 </Typography>
                 <Box
@@ -259,10 +271,11 @@ const StylesConfiguration: React.FC = () => {
                     bgcolor: estilos.input?.borderColor || '#d3d3d3',
                     borderRadius: '50%',
                     cursor: 'pointer',
+                    border: '.2px solid #c1c1c1',
                   }}
                   onClick={handleColorClick('border')}
                 />
-                <Typography variant="subtitle2" sx={{ mx: 2 }}>
+                <Typography variant="subtitle2" sx={{ mx: 1 }}>
                   Background
                 </Typography>
                 <Box
@@ -272,10 +285,11 @@ const StylesConfiguration: React.FC = () => {
                     bgcolor: estilos.input?.backgroundColor || '#d3d3d3',
                     borderRadius: '50%',
                     cursor: 'pointer',
+                    border: '.2px solid #c1c1c1',
                   }}
                   onClick={handleColorClick('background')}
                 />
-                <Typography variant="subtitle2" sx={{ mx: 2 }}>
+                <Typography variant="subtitle2" sx={{ mx: 1 }}>
                   Text
                 </Typography>
                 <Box
@@ -285,6 +299,7 @@ const StylesConfiguration: React.FC = () => {
                     bgcolor: estilos.input?.color || '#d3d3d3',
                     borderRadius: '50%',
                     cursor: 'pointer',
+                    border: '.2px solid #c1c1c1',
                   }}
                   onClick={handleColorClick('text')}
                 />

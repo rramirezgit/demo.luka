@@ -16,7 +16,6 @@ const AmountField: React.FC<AmountFieldProps> = ({ value, setFieldValue }) => (
     variant="standard"
     value={value}
     onChange={(e) => setFieldValue('strMonto', e.target.value)}
-    sx={{ mb: 2 }}
   />
 );
 

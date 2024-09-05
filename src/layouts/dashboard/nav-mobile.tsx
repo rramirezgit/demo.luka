@@ -3,7 +3,6 @@ import type { NavSectionProps } from 'src/components/nav-section';
 import { useEffect } from 'react';
 
 import Box from '@mui/material/Box';
-import { Badge, Tooltip, IconButton } from '@mui/material';
 import Drawer, { drawerClasses } from '@mui/material/Drawer';
 
 import { usePathname } from 'src/routes/hooks';
@@ -11,7 +10,6 @@ import { usePathname } from 'src/routes/hooks';
 import { useFormStore } from 'src/store/demoFormStore';
 
 import { Logo } from 'src/components/logo';
-import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import { NavSectionVertical } from 'src/components/nav-section';
 import ActionFooter from 'src/components/nav-section/vertical/ActionFooter';
@@ -57,21 +55,6 @@ export function NavMobile({ data, open, onClose, slots, sx, ...other }: NavMobil
           sx={{ pl: 3.5, pt: 2.5, pb: 1, pr: 3, display: 'flex', justifyContent: 'space-between' }}
         >
           <Logo width={83} height={37} />
-          <Tooltip title="Reset">
-            <IconButton
-              onClick={() => {
-                const lib = document.querySelector('#container-luka-demo');
-                if (lib) {
-                  lib.innerHTML = '';
-                }
-                resetStore();
-              }}
-            >
-              <Badge color="error" variant="dot" invisible={!isModified}>
-                <Iconify icon="solar:restart-bold" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
         </Box>
       )}
 

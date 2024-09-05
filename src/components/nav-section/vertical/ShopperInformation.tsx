@@ -4,11 +4,13 @@ import React from 'react';
 
 import {
   Stack,
+  Checkbox,
   Accordion,
   TextField,
   Typography,
   AccordionSummary,
   AccordionDetails,
+  FormControlLabel,
 } from '@mui/material';
 
 import { Iconify } from 'src/components/iconify';
@@ -24,10 +26,20 @@ const ShopperInformation: React.FC<ShopperInformationProps> = ({ formStore }) =>
       expandIcon={<Iconify icon="fluent:chevron-down-12-regular" width={17} height={17} />}
     >
       <SvgShopperinfo style={{ marginRight: 8, width: 24, height: 24 }} />
-      <Typography>Shopper information</Typography>
+      <Typography>Shopper settings</Typography>
     </AccordionSummary>
     <AccordionDetails sx={{ padding: '2px 10px 15px 10px' }}>
       <Stack spacing={2}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              id="saveCard"
+              checked={formStore.guardarTarjeta}
+              onChange={(e) => formStore.setFieldValue('guardarTarjeta', e.target.checked)}
+            />
+          }
+          label="Save Payment Information"
+        />
         <TextField
           fullWidth
           id="email"

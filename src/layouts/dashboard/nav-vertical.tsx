@@ -2,15 +2,12 @@ import type { Breakpoint } from '@mui/material';
 import type { NavSectionProps } from 'src/components/nav-section';
 
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Badge, Tooltip, IconButton, Typography } from '@mui/material';
 
-import { useFormStore } from 'src/store/demoFormStore';
 import { varAlpha, hideScrollY } from 'src/theme/styles';
 
 import { Logo } from 'src/components/logo';
-import { Iconify } from 'src/components/iconify';
-import { Scrollbar } from 'src/components/scrollbar';
 import ActionFooter from 'src/components/nav-section/vertical/ActionFooter';
 import { NavSectionMini, NavSectionVertical } from 'src/components/nav-section';
 
@@ -37,8 +34,6 @@ export function NavVertical({
 }: NavVerticalProps) {
   const theme = useTheme();
 
-  const { resetStore, isModified } = useFormStore();
-
   const renderNavVertical = (
     <>
       {slots?.topArea ?? (
@@ -50,21 +45,6 @@ export function NavVertical({
             }}
           >
             <Logo width={83} height={37} />
-            <Tooltip title="Reset">
-              <IconButton
-                onClick={() => {
-                  const lib = document.querySelector('#container-luka-demo');
-                  if (lib) {
-                    lib.innerHTML = '';
-                  }
-                  resetStore();
-                }}
-              >
-                <Badge color="error" variant="dot" invisible={!isModified}>
-                  <Iconify icon="solar:restart-bold" />
-                </Badge>
-              </IconButton>
-            </Tooltip>
           </Box>
           <Typography sx={{ fontSize: '16px', color: 'black', mt: '24px', fontWeight: 700 }}>
             Embedded Payment Gateway Solution:
@@ -90,9 +70,30 @@ export function NavVertical({
         </Box>
       )}
 
-      <Scrollbar fillContent sx={{ p: '0px 42px 24px 42px' }}>
+      <Box
+        sx={{
+          p: '0px 42px 24px 42px',
+          overflowY: 'auto',
+          scrollbarWidth: 'thin',
+          flex: '1 1 auto',
+          scrollbarColor: '#C0C0C0 transparent', // Color del scroll
+          '&::-webkit-scrollbar': {
+            width: '8px', // Anchura de la barra de desplazamiento
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#C0C0C0', // Color del thumb
+            borderRadius: '4px', // Bordes redondeados
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#A0A0A0', // Color del thumb al pasar el ratón
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: 'transparent', // Color de la pista del scroll
+          },
+        }}
+      >
         <NavSectionVertical data={data} sx={{ flex: '1 1 auto' }} {...other} />
-      </Scrollbar>
+      </Box>
       <ActionFooter buttonColor="#3b82f6" />
     </>
   );

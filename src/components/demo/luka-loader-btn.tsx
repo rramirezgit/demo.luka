@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
 
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 import useLukaInitialization from 'src/hooks/use-luka-init';
 
@@ -9,7 +8,7 @@ import { useAuthStore } from 'src/store/loginStore';
 import { useFormStore } from 'src/store/demoFormStore';
 
 export function LukaLoaderButton() {
-  const { performLogin, token, trazaId, loading } = useAuthStore();
+  const { token, trazaId } = useAuthStore();
 
   const {
     setLukaInitialized,
@@ -35,10 +34,6 @@ export function LukaLoaderButton() {
     lukapayId,
     referencia,
   } = useFormStore();
-
-  useEffect(() => {
-    performLogin();
-  }, []);
 
   const initializeLuka = useLukaInitialization(token, {
     montoConfig: {
@@ -135,7 +130,7 @@ export function LukaLoaderButton() {
   };
 
   return (
-    <Button
+    <LoadingButton
       fullWidth
       id="luka-loader-btn"
       color="primary"
@@ -146,6 +141,6 @@ export function LukaLoaderButton() {
       onClick={handleLoadClick}
     >
       Load Demo
-    </Button>
+    </LoadingButton>
   );
 }

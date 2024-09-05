@@ -6,14 +6,12 @@ import {
   Stack,
   Select,
   MenuItem,
-  Checkbox,
   Accordion,
   Typography,
   InputLabel,
   FormControl,
   AccordionSummary,
   AccordionDetails,
-  FormControlLabel,
 } from '@mui/material';
 
 import { Iconify } from 'src/components/iconify';
@@ -47,26 +45,6 @@ const AdvancedSettings: React.FC<AdvancedSettingsProps> = ({ formStore }) => (
             <MenuItem value="link">Link</MenuItem>
           </Select>
         </FormControl>
-        <FormControlLabel
-          control={
-            <Checkbox
-              id="saveCard"
-              checked={formStore.guardarTarjeta}
-              onChange={(e) => formStore.setFieldValue('guardarTarjeta', e.target.checked)}
-            />
-          }
-          label="Save Card to Vault"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              id="verticalLayout"
-              checked={formStore.horizontal}
-              onChange={(e) => formStore.setFieldValue('horizontal', e.target.checked)}
-            />
-          }
-          label="Vertical layout"
-        />
       </Stack>
     </AccordionDetails>
   </Accordion>

@@ -38,7 +38,7 @@ export interface Estilos {
   };
 }
 
-interface FormState {
+export interface FormState {
   lukaInitialized: boolean;
   strMonto: string;
   horizontalLayout: boolean;
@@ -114,14 +114,14 @@ const initialState: Omit<
       backgroundColor: 'white',
       color: 'black',
       fontSize: 12,
-      radio: 2,
+      radio: 10,
       height: 40,
       weight: 1,
     },
     botton: {
       backgroundColor: '#0516b1',
       color: 'white',
-      radio: 0,
+      radio: 10,
       fontSize: 16,
       height: 50,
     },
@@ -129,7 +129,7 @@ const initialState: Omit<
     borderPadding: '1.5rem',
     formBorder: 'solid 1px #dedddd',
     carrusel: {
-      borderRadius: 2,
+      borderRadius: 10,
       border: '1px solid',
       borderColor: '#dedddd',
       boxShadow: 'none',

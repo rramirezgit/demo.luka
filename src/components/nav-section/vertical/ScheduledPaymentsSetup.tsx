@@ -26,7 +26,7 @@ const ScheduledPaymentsSetup: React.FC<ScheduledPaymentsSetupProps> = ({ formSto
       expandIcon={<Iconify icon="fluent:chevron-down-12-regular" width={17} height={17} />}
     >
       <SvgScheduledpayments style={{ marginRight: 8, width: 24, height: 24 }} />
-      <Typography>Scheduled Payments Setup</Typography>
+      <Typography>Scheduled Payments</Typography>
     </AccordionSummary>
     <AccordionDetails>
       <Stack spacing={2}>

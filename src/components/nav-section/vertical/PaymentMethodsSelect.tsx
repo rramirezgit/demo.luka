@@ -173,7 +173,7 @@ const PaymentMethodsSelect: React.FC<PaymentMethodsSelectProps> = ({ setFieldVal
       try {
         const methods = paymentMethodsByCurrency[moneda] || [];
         setPaymentMethodsOptions([
-          { Tipo: 'all', Nombre: 'Todos', Imagen: '', disabled: false },
+          { Tipo: 'all', Nombre: 'All', Imagen: '', disabled: false },
           ...methods,
         ]);
       } catch (error) {
@@ -254,7 +254,6 @@ const PaymentMethodsSelect: React.FC<PaymentMethodsSelectProps> = ({ setFieldVal
           placeholder="Search..."
         />
       )}
-      sx={{ mb: 2 }}
     />
   );
 };

@@ -20,7 +20,7 @@ declare module '@mui/material/styles' {
 
 // ----------------------------------------------------------------------
 
-export const defaultFont = 'Public Sans';
+export const defaultFont = 'Open Sans';
 
 export const primaryFont = setFont(defaultFont);
 

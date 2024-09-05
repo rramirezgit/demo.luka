@@ -16,7 +16,7 @@ const CurrencySelect: React.FC<CurrencySelectProps> = ({ value, setFieldValue })
   ];
 
   return (
-    <FormControl fullWidth variant="standard" sx={{ mb: 2 }}>
+    <FormControl fullWidth variant="standard">
       <Autocomplete
         id="currency"
         options={currencies}

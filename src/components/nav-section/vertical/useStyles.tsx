@@ -81,23 +81,23 @@ const useSetStyles = () => {
     }
 
     /* Borders */
-    if (styles?.borderPadding) {
-      document.documentElement.style.setProperty(
-        '--luka-form-border-padding',
-        styles.borderPadding
-      );
-    }
-    if (styles?.formBorder) {
-      document.documentElement.style.setProperty('--luka-form-border', styles.formBorder);
-    }
+    // if (styles?.borderPadding) {
+    //   document.documentElement.style.setProperty(
+    //     '--luka-form-border-padding',
+    //     styles.borderPadding
+    //   );
+    // }
+    // if (styles?.formBorder) {
+    //   document.documentElement.style.setProperty('--luka-form-border', styles.formBorder);
+    // }
 
     /* Carousel */
-    if (styles?.carrusel?.borderRadius) {
-      document.documentElement.style.setProperty(
-        '--luka-carousel-border-radius',
-        `${styles.carrusel.borderRadius}px`
-      );
-    }
+    // if (styles?.carrusel?.borderRadius) {
+    //   document.documentElement.style.setProperty(
+    //     '--luka-carousel-border-radius',
+    //     `${styles.carrusel.borderRadius}px`
+    //   );
+    // }
     if (styles?.carrusel?.border) {
       document.documentElement.style.setProperty('--luka-carousel-border', styles.carrusel.border);
     }
