@@ -38,7 +38,7 @@ const ScheduledPaymentsSetup: React.FC<ScheduledPaymentsSetupProps> = ({ formSto
               onChange={(e) => formStore.setFieldValue('checkCuotas', e.target.checked)}
             />
           }
-          label="Installment Options"
+          label="Enable Scheduled Payments"
         />
         <TextField
           fullWidth

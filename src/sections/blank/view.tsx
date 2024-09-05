@@ -14,7 +14,6 @@ import { useAuthStore } from 'src/store/loginStore';
 import { useFormStore } from 'src/store/demoFormStore';
 
 import SvgBot from 'src/components/svg/Bot';
-import { IPhoneFrame } from 'src/components/demo/iphone';
 
 // ----------------------------------------------------------------------
 
@@ -54,27 +53,125 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
     >
       {horizontalLayout ? (
         smUp ? (
-          <IPhoneFrame>
-            {!lukaInitialized && (
+          // <IPhoneFrame>
+          //   {!lukaInitialized && (
+          //     <Box
+          //       sx={{
+          //         height: '450px',
+          //         display: 'flex',
+          //         flexDirection: 'column',
+          //         alignItems: 'center',
+          //         justifyContent: 'center',
+          //       }}
+          //     >
+          //       <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
+          //       <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
+          //         Start setting up your gateway
+          //       </Typography>
+          //     </Box>
+          //   )}
+          //   <div style={{ width: '100%', padding: 2 }}>
+          //     <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
+          //   </div>
+          // </IPhoneFrame>
+          <Box
+            sx={{
+              position: 'relative',
+              width: 360, // Ajusta el ancho según tus necesidades
+              height: 680, // Ajusta la altura según tus necesidades
+              borderRadius: '44.06px',
+              backgroundColor: '#F6F7FB',
+              boxShadow: 'inset 0 0 8px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(0, 0, 0, 0.1)',
+              margin: 'auto', // Centrado en el contenedor padre
+              mt: 2, // Margen superior
+              mb: 3,
+              overflow: 'hidden', // Ocultar desbordamientos
+            }}
+          >
+            {/* Botones laterales simulados */}
+            <Box
+              sx={{
+                position: 'absolute',
+                left: -3,
+                top: '20%',
+                width: 6,
+                height: 50,
+                borderRadius: 3,
+                backgroundColor: '#E0E0E0',
+              }}
+            />
+            <Box
+              sx={{
+                position: 'absolute',
+                left: -3,
+                top: '35%',
+                width: 6,
+                height: 35,
+                borderRadius: 3,
+                backgroundColor: '#E0E0E0',
+              }}
+            />
+            <Box
+              sx={{
+                position: 'absolute',
+                right: -3,
+                top: '30%',
+                width: 6,
+                height: 70,
+                borderRadius: 3,
+                backgroundColor: '#E0E0E0',
+              }}
+            />
+
+            {/* Contenido principal */}
+            <Box
+              sx={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: 2,
+              }}
+            >
+              {/* Puedes colocar cualquier contenido dentro de este contenedor */}
               <Box
                 sx={{
-                  height: '450px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'white',
+                  borderRadius: '30.06px',
+                  paddingTop: 9,
+                  paddingX: 1,
+                  overflow: 'scroll',
+                  /// ocultar barra de desplazamiento
+                  '&::-webkit-scrollbar': {
+                    display: 'none',
+                  },
                 }}
               >
-                <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
-                <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
-                  Start setting up your gateway
-                </Typography>
+                {!lukaInitialized && (
+                  <Box
+                    sx={{
+                      height: '450px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
+                    <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
+                      Start setting up your gateway
+                    </Typography>
+                  </Box>
+                )}
+                <div style={{ width: '100%', height: '10%', padding: 2 }}>
+                  <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
+                </div>
               </Box>
-            )}
-            <div style={{ width: '100%', padding: 2 }}>
-              <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
-            </div>
-          </IPhoneFrame>
+            </Box>
+          </Box>
         ) : (
           <>
             {!lukaInitialized && (
@@ -102,8 +199,8 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
         <Box
           sx={{
             width: '100%',
-            height: 'calc(100vh - 25vh)',
-            maxWidth: '100%',
+            height: 'calc(100vh - 30vh)',
+            maxWidth: '90%',
             mt: 5,
             borderRadius: 1,
             bgcolor: 'white',
