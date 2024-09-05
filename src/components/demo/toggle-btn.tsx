@@ -59,7 +59,10 @@ const ToggleButton = () => {
       }}
     >
       <IconButton
-        onClick={() => handleToggle('desktop')}
+        onClick={() => {
+          if (selected === 'desktop') return;
+          handleToggle('desktop');
+        }}
         color={selected === 'desktop' ? 'primary' : 'default'}
       >
         <SvgDesktop
@@ -72,7 +75,10 @@ const ToggleButton = () => {
       </IconButton>
       <Divider />
       <IconButton
-        onClick={() => handleToggle('mobile')}
+        onClick={() => {
+          if (selected === 'mobile') return;
+          handleToggle('mobile');
+        }}
         color={selected === 'mobile' ? 'primary' : 'default'}
       >
         <SvgCel

@@ -3,7 +3,7 @@
 
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import { Stack, Button, Typography } from '@mui/material';
@@ -28,12 +28,19 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
   const { lukaInitialized, horizontalLayout, resetStore } = useFormStore();
 
   const smUp = useResponsive('up', 'sm');
+  const [initialResposive, setInitialResponsive] = useState(smUp);
   useEffect(() => {
     if (token.length > 0 && trazaId.length > 0) {
       setToken(token);
       setTrazaId(trazaId);
     }
   }, []);
+
+  useEffect(() => {
+    if (lukaInitialized) {
+      document.getElementById('luka-loader-btn')?.click();
+    }
+  }, [smUp]);
 
   // saber si es un mobil android o ios o un telefono
 
@@ -200,7 +207,7 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
           sx={{
             width: '100%',
             height: 'calc(100vh - 30vh)',
-            maxWidth: '90%',
+            maxWidth: '1000px',
             mt: 5,
             borderRadius: 1,
             bgcolor: 'white',
@@ -236,7 +243,7 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
                   dy=".3em"
                   textAnchor="middle"
                 >
-                  Luka
+                  Your Website
                 </text>
 
                 <g clipPath="url(#clip0_1037_167)">
