@@ -47,7 +47,7 @@ export function NavVertical({
             <Logo width={83} height={37} />
           </Box>
           <Typography sx={{ fontSize: '16px', color: 'black', mt: '24px', fontWeight: 700 }}>
-            Embedded Payment Gateway Solution:
+            Embedded Payment Gateway Solution
           </Typography>
           {/* <Typography sx={{ fontSize: '16px', color: 'black', mt: '14px' }}>
             Embedded Payment Gateway Solution:

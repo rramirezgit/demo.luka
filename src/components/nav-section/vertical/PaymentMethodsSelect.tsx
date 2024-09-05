@@ -20,7 +20,7 @@ interface PaymentMethodsSelectProps {
 const paymentMethodsByCurrency: any = {
   USD: [
     {
-      Nombre: 'Crédito / Débito',
+      Nombre: 'Credit / Debit',
       Tipo: 'tdc_bs',
       Imagen: 'pago-tarjetas.svg',
     },
@@ -35,94 +35,94 @@ const paymentMethodsByCurrency: any = {
       Imagen: 'zelle.svg',
     },
     {
-      Nombre: 'Transferencia',
+      Nombre: 'Bank Transfer',
       Tipo: 'usd_transfer',
       Imagen: 'transfer.svg',
     },
     {
-      Nombre: 'Pago en Efectivo',
+      Nombre: 'Cash Payment',
       Tipo: 'cash',
       Imagen: 'cash.svg',
     },
     {
-      Nombre: 'Pago en Cuotas',
+      Nombre: 'Installment Payment',
       Tipo: 'pago_cuotas',
       Imagen: 'pago_cuotas.svg',
     },
   ],
   VES: [
     {
-      Nombre: 'Débito Mercantil',
+      Nombre: 'Mercantil Debit',
       Tipo: 'tdd_mc',
       Imagen: 'mercantil.svg',
     },
     {
-      Nombre: 'Tarjetas de Crédito Bs.',
+      Nombre: 'Bolívar Credit Cards',
       Tipo: 'tdc_mc',
       Imagen: 'pago-tarjetas.svg',
     },
     {
-      Nombre: 'Pago Móvil C2P',
+      Nombre: 'C2P Mobile Payment',
       Tipo: 'c2p',
       Imagen: 'pagomovil.svg',
     },
     {
-      Nombre: 'Pago Móvil Bancamiga',
+      Nombre: 'Bancamiga Mobile Payment',
       Tipo: 'pm_bamiga',
       Imagen: 'pagomovil.svg',
     },
     {
-      Nombre: 'Débito Banesco',
+      Nombre: 'Banesco Debit',
       Tipo: 'banesco',
       Imagen: 'banescopagos.svg',
     },
     {
-      Nombre: 'Pago Móvil BNC',
+      Nombre: 'BNC Mobile Payment',
       Tipo: 'pm_bnc',
       Imagen: 'pagomovil.svg',
     },
     {
-      Nombre: 'Pago Móvil Banplus',
+      Nombre: 'Banplus Mobile Payment',
       Tipo: 'pm_banplus',
       Imagen: 'pagomovil.svg',
     },
     {
-      Nombre: 'Débito Credicard',
+      Nombre: 'Credicard Debit',
       Tipo: 'tdd_ccard',
       Imagen: 'credicard.png',
     },
     {
-      Nombre: 'Tarjeta de Crédito',
+      Nombre: 'Credit Card',
       Tipo: 'tdc_ccard',
       Imagen: 'credicard.png',
     },
     {
-      Nombre: 'Tarjeta de Débito BNC',
+      Nombre: 'BNC Debit Card',
       Tipo: 'tdd_bnc',
       Imagen: 'bnc.svg',
     },
     {
-      Nombre: 'Tarjetas de Crédito BNC',
+      Nombre: 'BNC Credit Cards',
       Tipo: 'tdc_bnc',
       Imagen: 'pago-tarjetas.svg',
     },
     {
-      Nombre: 'Pago Móvil Banesco',
+      Nombre: 'Banesco Mobile Payment',
       Tipo: 'pm_banesco',
       Imagen: 'pagomovil.svg',
     },
     {
-      Nombre: 'Pago Móvil BDV',
+      Nombre: 'BDV Mobile Payment',
       Tipo: 'pm_bdv',
       Imagen: 'pagomovil.svg',
     },
     {
-      Nombre: 'Botón de Pago BDV',
+      Nombre: 'BDV Payment Button',
       Tipo: 'bdv',
       Imagen: 'bdv.svg',
     },
     {
-      Nombre: 'Pago Móvil Mi Banco',
+      Nombre: 'Mi Banco Mobile Payment',
       Tipo: 'pm_mibanco',
       Imagen: 'pagomovil.svg',
     },
@@ -134,19 +134,19 @@ const paymentMethodsByCurrency: any = {
       Imagen: 'webpay.svg',
     },
     {
-      Nombre: 'Pago Cuenta a Cuenta',
+      Nombre: 'Account to Account Payment',
       Tipo: 'khipu',
       Imagen: 'khipu.png',
     },
     {
-      Nombre: 'Transferencia Bancaria',
+      Nombre: 'Bank Transfer',
       Tipo: 'etpay',
       Imagen: 'transfer.svg',
     },
   ],
   EUR: [
     {
-      Nombre: 'Crédito / Débito',
+      Nombre: 'Credit / Debit',
       Tipo: 'tdc_bs',
       Imagen: 'pago-tarjetas.svg',
     },
@@ -156,7 +156,7 @@ const paymentMethodsByCurrency: any = {
       Imagen: 'paypal.svg',
     },
     {
-      Nombre: 'Transferencia Bancaria',
+      Nombre: 'Bank Transfer',
       Tipo: 'truelayer',
       Imagen: 'transfer.svg',
     },

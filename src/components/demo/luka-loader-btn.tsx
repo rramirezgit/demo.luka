@@ -33,6 +33,7 @@ export function LukaLoaderButton() {
     idConfigCuotas,
     lukapayId,
     referencia,
+    setErrors,
   } = useFormStore();
 
   const initializeLuka = useLukaInitialization(token, {
@@ -81,6 +82,10 @@ export function LukaLoaderButton() {
   });
 
   const handleLoadClick = (e: React.MouseEvent) => {
+    if (!strMonto || strMonto === '') {
+      setErrors('strMonto', 'Amount is required');
+      return;
+    }
     setLukaInitialized(false);
     console.log('horizontal', horizontal);
     initializeLuka({

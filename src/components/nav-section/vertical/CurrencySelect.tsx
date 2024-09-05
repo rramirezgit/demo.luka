@@ -9,10 +9,10 @@ interface CurrencySelectProps {
 
 const CurrencySelect: React.FC<CurrencySelectProps> = ({ value, setFieldValue }) => {
   const currencies = [
-    { label: 'USD', value: 'USD' },
-    { label: 'Euro', value: 'EUR' },
-    { label: 'Peso Chileno', value: 'CLP' },
-    { label: 'Bolivares', value: 'VES' },
+    { label: 'USD Dollars', value: 'USD' },
+    { label: 'EUR Euros', value: 'EUR' },
+    { label: 'CLP Chilean Peso', value: 'CLP' },
+    { label: 'VEF Venezuelan Bolivares', value: 'VES' },
   ];
 
   return (

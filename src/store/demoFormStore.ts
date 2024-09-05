@@ -66,11 +66,32 @@ export interface FormState {
   horizontal: boolean;
   estilos: Estilos;
   isModified: boolean;
+  setErrors: (field: keyof FormState, value: string) => void;
   setFieldValue: (field: keyof FormState, value: any) => void;
   resetStore: () => void;
   validateAndSetMonto: () => boolean;
   setLukaInitialized: (value: boolean) => void;
   checkIfModified: () => void; // Agrega checkIfModified a la interfaz
+  errors: {
+    strMonto?: string;
+    strDecimales?: string;
+    color?: string;
+    terminos?: string;
+    metodos?: string;
+    sepDecimal?: string;
+    sepMiles?: string;
+    seleccion?: string;
+    email?: string;
+    trazaId?: string;
+    lukapayId?: string;
+    referencia?: string;
+    fechaCuotas?: string;
+    tipoPagoCuota?: string;
+    frecuenciaCuotas?: string;
+    cantidadCuotas?: string;
+    idConfigCuotas?: string;
+    moneda?: string;
+  };
 }
 
 const initialState: Omit<
@@ -81,10 +102,12 @@ const initialState: Omit<
   | 'setLukaInitialized'
   | 'isModified'
   | 'checkIfModified'
+  | 'setErrors'
 > = {
+  errors: {},
   horizontalLayout: false,
   lukaInitialized: false,
-  strMonto: '18.03',
+  strMonto: '',
   idioma: 'eng',
   strDecimales: '',
   color: '',
@@ -140,6 +163,9 @@ const initialState: Omit<
 export const useFormStore = create<FormState>((set, get) => ({
   ...initialState,
   isModified: false,
+  setErrors: (field, value) => {
+    set((state) => ({ ...state, errors: { ...state.errors, [field]: value } }));
+  },
   setFieldValue: (field, value) => {
     set((state) => ({ ...state, [field]: value }));
     get().checkIfModified(); // Llama a checkIfModified después de cambiar el estado
