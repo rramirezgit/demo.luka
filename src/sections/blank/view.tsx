@@ -36,39 +36,69 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
     }
   }, []);
 
+  // saber si es un mobil android o ios o un telefono
+
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
+        backgroundColor: {
+          xs: 'white',
+          sm: 'transparent',
+        },
         alignItems: 'center',
         paddingLeft: { xs: '16px', sm: '40px' },
         paddingRight: { xs: '16px', sm: '40px' },
       }}
     >
       {horizontalLayout ? (
-        <IPhoneFrame>
-          {!lukaInitialized && (
-            <Box
-              sx={{
-                height: '450px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
-              <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
-                Start setting up your gateway
-              </Typography>
-            </Box>
-          )}
-          <div style={{ width: '100%', padding: 2 }}>
-            <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
-          </div>
-        </IPhoneFrame>
-      ) : (
+        smUp ? (
+          <IPhoneFrame>
+            {!lukaInitialized && (
+              <Box
+                sx={{
+                  height: '450px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
+                <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
+                  Start setting up your gateway
+                </Typography>
+              </Box>
+            )}
+            <div style={{ width: '100%', padding: 2 }}>
+              <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
+            </div>
+          </IPhoneFrame>
+        ) : (
+          <>
+            {!lukaInitialized && (
+              <Box
+                sx={{
+                  height: 'calc(100vh - 25vh)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
+                <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
+                  Start setting up your gateway
+                </Typography>
+              </Box>
+            )}
+            <div style={{ width: '100%', padding: 2 }}>
+              <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
+            </div>
+          </>
+        )
+      ) : smUp ? (
         <Box
           sx={{
             width: '100%',
@@ -177,6 +207,28 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
             <Box id="container-luka-demo" sx={{ padding: lukaInitialized ? 3 : 0 }} />
           </Box>
         </Box>
+      ) : (
+        <>
+          {!lukaInitialized && (
+            <Box
+              sx={{
+                height: 'calc(100vh - 25vh)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <SvgBot style={{ width: 100, height: 100, color: '#ACB9C9' }} />
+              <Typography variant="h6" sx={{ mt: 2, color: '#ACB9C9' }}>
+                Start setting up your gateway
+              </Typography>
+            </Box>
+          )}
+          <div style={{ width: '100%', padding: 2 }}>
+            <div id="container-luka-demo" style={{ width: '100%', height: '100%' }} />
+          </div>
+        </>
       )}
       <Stack
         sx={{
