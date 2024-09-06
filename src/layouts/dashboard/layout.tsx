@@ -79,7 +79,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
             data={{
               nav: navData,
               langs: [
-                { value: 'eng', label: 'English', countryCode: 'GB' },
+                { value: 'eng', label: 'English', countryCode: 'US' },
                 { value: 'esp', label: 'Español', countryCode: 'ES' },
                 // { value: 'jpn', label: 'Japones', countryCode: 'JP' },
               ],

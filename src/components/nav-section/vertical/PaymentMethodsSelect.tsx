@@ -45,7 +45,7 @@ const paymentMethodsByCurrency: any = {
       Imagen: 'cash.svg',
     },
     {
-      Nombre: 'Installment Payment',
+      Nombre: 'Scheduled Payments',
       Tipo: 'pago_cuotas',
       Imagen: 'pago_cuotas.svg',
     },
