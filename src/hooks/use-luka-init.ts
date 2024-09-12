@@ -10,6 +10,7 @@ const useLukaInitialization = (token: string, initialState: any) => {
     }
 
     if (token) {
+      console.log('config', config);
       window.luka.init(
         token,
         'container-luka-demo',

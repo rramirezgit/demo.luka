@@ -25,17 +25,17 @@ export function LukaLoaderButton() {
     sepDecimal,
     sepMiles,
     guardarTarjeta,
+    tipoPagoCuota,
     checkCuotas,
     horizontal,
     fechaCuotas,
     frecuenciaCuotas,
-    cantidadCuotas,
+    numeroCuota,
     idConfigCuotas,
     lukapayId,
     referencia,
     setErrors,
   } = useFormStore();
-
   const initializeLuka = useLukaInitialization(token, {
     montoConfig: {
       monto: parseFloat(strMonto),
@@ -70,11 +70,13 @@ export function LukaLoaderButton() {
       nombrePagador: 'Juan Leung',
       referenciaPago: referencia,
       lukapayId,
+
       cuotasConfig: checkCuotas
         ? {
+            tipoPagoCuota,
             fechaFinal: fechaCuotas,
             frecuencia: frecuenciaCuotas,
-            cantidadCuota: cantidadCuotas,
+            numeroCuota,
             idConfig: idConfigCuotas,
           }
         : null,
@@ -124,9 +126,10 @@ export function LukaLoaderButton() {
         lukapayId,
         cuotasConfig: checkCuotas
           ? {
+              tipoPagoCuota,
               fechaFinal: fechaCuotas,
               frecuencia: frecuenciaCuotas,
-              cantidadCuota: cantidadCuotas,
+              numeroCuota,
               idConfig: idConfigCuotas,
             }
           : null,

@@ -47,7 +47,7 @@ const ToggleButton = () => {
   useEffect(() => {
     if (lukaInitialized) {
       setTimeout(() => {
-        document.getElementById('luka-loader-btn')?.click();
+        // document.getElementById('luka-loader-btn')?.click();
       }, 100);
     }
   }, [horizontalLayout, lukaInitialized]);

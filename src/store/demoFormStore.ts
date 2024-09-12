@@ -5,7 +5,7 @@ interface CuotasConfig {
   fechaFinal: string | null;
   tipoPagoCuota: string;
   frecuencia: string;
-  cantidadCuota: string;
+  numeroCuota: string;
   idConfig: string;
 }
 
@@ -59,7 +59,7 @@ export interface FormState {
   fechaCuotas: string | null;
   tipoPagoCuota: string;
   frecuenciaCuotas: string;
-  cantidadCuotas: string;
+  numeroCuota: string;
   idConfigCuotas: string;
   objCuotasConfig: CuotasConfig | null;
   moneda: string;
@@ -88,7 +88,7 @@ export interface FormState {
     fechaCuotas?: string;
     tipoPagoCuota?: string;
     frecuenciaCuotas?: string;
-    cantidadCuotas?: string;
+    numeroCuota?: string;
     idConfigCuotas?: string;
     moneda?: string;
   };
@@ -125,7 +125,7 @@ const initialState: Omit<
   fechaCuotas: null,
   tipoPagoCuota: '',
   frecuenciaCuotas: '',
-  cantidadCuotas: '',
+  numeroCuota: '',
   idConfigCuotas: '',
   objCuotasConfig: null,
   moneda: 'USD',

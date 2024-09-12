@@ -1,5 +1,6 @@
 // ScheduledPaymentsSetup.tsx
 
+import dayjs from 'dayjs';
 import React, { useState } from 'react';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -34,7 +35,7 @@ const ScheduledPaymentsSetup: React.FC<ScheduledPaymentsSetupProps> = ({ formSto
     formStore.setFieldValue('fechaCuotas', null);
     formStore.setFieldValue('frecuenciaCuotas', '');
     formStore.setFieldValue('idConfigCuotas', '');
-    formStore.setFieldValue('cantidadCuotas', '');
+    formStore.setFieldValue('numeroCuota', '');
   };
 
   return (
@@ -62,7 +63,10 @@ const ScheduledPaymentsSetup: React.FC<ScheduledPaymentsSetupProps> = ({ formSto
             fullWidth
             id="installmentPaymentType"
             value={installmentPaymentType}
-            onChange={(e) => handleInstallmentPaymentTypeChange(e.target.value as string)}
+            onChange={(e) => {
+              formStore.setFieldValue('tipoPagoCuota', e.target.value);
+              handleInstallmentPaymentTypeChange(e.target.value as string);
+            }}
             displayEmpty
             variant="standard"
           >
@@ -71,7 +75,7 @@ const ScheduledPaymentsSetup: React.FC<ScheduledPaymentsSetupProps> = ({ formSto
             </MenuItem>
             <MenuItem value="dynamic">Dynamic</MenuItem>
             <MenuItem value="pre-config">Pre-Configured</MenuItem>
-            <MenuItem value="fixes">Fixes</MenuItem>
+            <MenuItem value="fixed">Fixed</MenuItem>
           </Select>
 
           {installmentPaymentType === 'dynamic' && (
@@ -79,8 +83,17 @@ const ScheduledPaymentsSetup: React.FC<ScheduledPaymentsSetupProps> = ({ formSto
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="Installment End Date"
-                  value={formStore.fechaCuotas ?? null}
-                  onChange={(e) => formStore.setFieldValue('fechaCuotas', e)}
+                  value={dayjs(formStore.fechaCuotas)}
+                  onChange={(e) => {
+                    if (e) {
+                      const dia = e.format('DD');
+                      const mes = e.format('MM');
+                      const anio = e.format('YYYY');
+                      formStore.setFieldValue('fechaCuotas', `${dia}/${mes}/${anio}`);
+                    } else {
+                      formStore.setFieldValue('fechaCuotas', null);
+                    }
+                  }}
                   slots={{
                     textField: TextField,
                   }}
@@ -120,7 +133,7 @@ const ScheduledPaymentsSetup: React.FC<ScheduledPaymentsSetupProps> = ({ formSto
             />
           )}
 
-          {installmentPaymentType === 'fixes' && (
+          {installmentPaymentType === 'fixed' && (
             <>
               <TextField
                 select
@@ -142,9 +155,9 @@ const ScheduledPaymentsSetup: React.FC<ScheduledPaymentsSetupProps> = ({ formSto
                 label="Number of Installments"
                 variant="standard"
                 inputProps={{ min: 1, max: 10 }}
-                value={formStore.cantidadCuotas}
+                value={formStore.numeroCuota}
                 onChange={(e) => {
-                  formStore.setFieldValue('cantidadCuotas', e.target.value);
+                  formStore.setFieldValue('numeroCuota', e.target.value);
                 }}
               />
             </>
