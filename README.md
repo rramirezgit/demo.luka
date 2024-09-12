@@ -20,3 +20,9 @@ Para iniciar el servidor de desarrollo, ejecuta:
 ```
 npm run dev
 ```
+
+### Configuración adicional para desarrollo
+
+Para un entorno de desarrollo completo, también necesitas levantar el API de Luka BlueSnapPayco y BluesnapPaycoJs.
+
+Asegúrate de tener ambos servicios en ejecución junto con el servidor de desarrollo principal para un funcionamiento correcto de la pasarela de pago en modo desarrollo.
