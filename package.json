@@ -41,6 +41,7 @@
     "@types/lodash": "^4.17.7",
     "autosuggest-highlight": "^3.3.4",
     "axios": "^1.7.5",
+    "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
     "framer-motion": "^11.2.10",
     "next": "^14.2.4",
