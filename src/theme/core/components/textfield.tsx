@@ -41,7 +41,8 @@ const MuiInput: Components<Theme>['MuiInput'] = {
   styleOverrides: {
     underline: ({ theme }) => ({
       '&::before': { borderBottomColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.32) },
-      '&::after': { borderBottomColor: theme.vars.palette.text.primary },
+      '&::after': { borderBottomColor: '#3b82f6' }, // Línea inferior al estar seleccionado
+      '&:hover:not(.Mui-disabled)::before': { borderBottomColor: '#3b82f6' }, // Línea inferior al hacer hover
     }),
   },
 };
@@ -56,7 +57,7 @@ const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
     root: ({ theme }) => ({
       [`&.${outlinedInputClasses.focused}`]: {
         [`& .${outlinedInputClasses.notchedOutline}`]: {
-          borderColor: theme.vars.palette.text.primary,
+          borderColor: '#3b82f6',
         },
       },
       [`&.${outlinedInputClasses.error}`]: {

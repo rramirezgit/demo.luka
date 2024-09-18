@@ -43,3 +43,5 @@ Para apuntar a calidad en tu entorno local, sigue estos pasos:
    ```
 
 Este proceso compilará la aplicación y la ejecutará en un entorno que simula la configuración de calidad.
+
+> **⚠️ Alerta:** Siempre que se suba un cambio, asegúrate de actualizar la versión del archivo `package.json`.

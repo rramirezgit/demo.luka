@@ -3,7 +3,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import { Stack, Button, Typography } from '@mui/material';
@@ -15,6 +15,8 @@ import { useFormStore } from 'src/store/demoFormStore';
 
 import SvgBot from 'src/components/svg/Bot';
 
+import packageJson from '../../../package.json';
+
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -25,10 +27,9 @@ type Props = {
 
 export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) {
   const { setToken, setTrazaId } = useAuthStore();
-  const { lukaInitialized, horizontalLayout, resetStore } = useFormStore();
+  const { lukaInitialized, horizontalLayout, resetStore, strMonto, moneda } = useFormStore();
 
   const smUp = useResponsive('up', 'sm');
-  const [initialResposive, setInitialResponsive] = useState(smUp);
   useEffect(() => {
     if (token.length > 0 && trazaId.length > 0) {
       setToken(token);
@@ -41,8 +42,6 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
       document.getElementById('luka-loader-btn')?.click();
     }
   }, [smUp]);
-
-  // saber si es un mobil android o ios o un telefono
 
   return (
     <Box
@@ -84,18 +83,17 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
           <Box
             sx={{
               position: 'relative',
-              width: 360, // Ajusta el ancho según tus necesidades
-              height: 680, // Ajusta la altura según tus necesidades
+              width: 360,
+              height: 680,
               borderRadius: '44.06px',
               backgroundColor: '#F6F7FB',
               boxShadow: 'inset 0 0 8px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(0, 0, 0, 0.1)',
-              margin: 'auto', // Centrado en el contenedor padre
-              mt: 2, // Margen superior
+              margin: 'auto',
+              mt: 2,
               mb: 3,
-              overflow: 'hidden', // Ocultar desbordamientos
+              overflow: 'hidden',
             }}
           >
-            {/* Botones laterales simulados */}
             <Box
               sx={{
                 position: 'absolute',
@@ -130,7 +128,6 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
               }}
             />
 
-            {/* Contenido principal */}
             <Box
               sx={{
                 width: '100%',
@@ -141,22 +138,38 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
                 padding: 2,
               }}
             >
-              {/* Puedes colocar cualquier contenido dentro de este contenedor */}
               <Box
                 sx={{
                   width: '100%',
                   height: '100%',
                   backgroundColor: 'white',
                   borderRadius: '30.06px',
-                  paddingTop: 9,
                   paddingX: 1,
                   overflow: 'scroll',
-                  /// ocultar barra de desplazamiento
                   '&::-webkit-scrollbar': {
                     display: 'none',
                   },
                 }}
               >
+                {Number(strMonto) > 0 && (
+                  <Box
+                    sx={{
+                      width: '100%',
+                      position: 'sticky',
+                      top: 0,
+                      zIndex: 100,
+                      paddingTop: 5,
+                      backgroundColor: 'white',
+                      fontSize: 24,
+                      fontWeight: 'bold',
+                      textAlign: 'center',
+                      color: '#79828b',
+                      paddingBottom: 2,
+                    }}
+                  >
+                    {strMonto} {moneda}
+                  </Box>
+                )}
                 {!lukaInitialized && (
                   <Box
                     sx={{
@@ -357,6 +370,17 @@ export function BlankView({ title = 'Blank', token = '', trazaId = '' }: Props) 
           Clear All
         </Button>
       </Stack>
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: 10,
+          right: 10,
+          fontSize: 12,
+          color: '#ACB9C9',
+        }}
+      >
+        v {packageJson.version}
+      </Box>
     </Box>
   );
 }

@@ -31,6 +31,7 @@ const ToggleButton = () => {
   const [selected, setSelected] = useState<'mobile' | 'desktop'>('desktop');
 
   const { setFieldValue, horizontalLayout, lukaInitialized } = useFormStore();
+
   const handleToggle = (option: 'mobile' | 'desktop') => {
     setSelected(option);
     const isHorizontal = option === 'mobile';
@@ -47,7 +48,7 @@ const ToggleButton = () => {
   useEffect(() => {
     if (lukaInitialized) {
       setTimeout(() => {
-        // document.getElementById('luka-loader-btn')?.click();
+        document.getElementById('luka-loader-btn')?.click();
       }, 100);
     }
   }, [horizontalLayout, lukaInitialized]);

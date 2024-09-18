@@ -23,9 +23,14 @@ const AmountField: React.FC<AmountFieldProps> = ({ value, setFieldValue }) => {
       variant="standard"
       value={value}
       onChange={(e) => {
-        setErrors('strMonto', '');
-        setFieldValue('strMonto', e.target.value);
+        const newValue = e.target.value;
+        if (/^\d*$/.test(newValue)) {
+          // Solo permite números
+          setErrors('strMonto', '');
+          setFieldValue('strMonto', newValue);
+        }
       }}
+      inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} // Configuración para solo números
     />
   );
 };

@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-import { Chip, TextField, IconButton, Autocomplete } from '@mui/material';
+import {
+  Box,
+  Chip,
+  List,
+  Popover,
+  MenuItem,
+  TextField,
+  IconButton,
+  ListItemText,
+  InputAdornment,
+  ListItemSecondaryAction,
+} from '@mui/material';
 
 import { useFormStore } from 'src/store/demoFormStore';
 
@@ -163,99 +174,281 @@ const paymentMethodsByCurrency: any = {
   ],
 };
 
-const PaymentMethodsSelect: React.FC<PaymentMethodsSelectProps> = ({ setFieldValue }) => {
+const PaymentMethodsSelectWithSearch: React.FC<PaymentMethodsSelectProps> = ({ setFieldValue }) => {
   const [paymentMethodsOptions, setPaymentMethodsOptions] = useState<PaymentMethod[]>([]);
   const [selectedPaymentMethods, setSelectedPaymentMethods] = useState<PaymentMethod[]>([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { moneda } = useFormStore();
 
   useEffect(() => {
-    const fetchPaymentMethods = async () => {
-      try {
-        const methods = paymentMethodsByCurrency[moneda] || [];
-        setPaymentMethodsOptions([
-          { Tipo: 'all', Nombre: 'All', Imagen: '', disabled: false },
-          ...methods,
-        ]);
-      } catch (error) {
-        console.error('Failed to fetch payment methods', error);
+    const methods = paymentMethodsByCurrency[moneda] || [];
+    setPaymentMethodsOptions(methods);
+    setSelectedPaymentMethods([{ Nombre: 'All', Tipo: 'all', Imagen: '' }]);
+    setFieldValue('metodos', methods.map((method: any) => method.Tipo).join(','));
+    setSearchInput('');
+  }, [moneda, setFieldValue]);
+
+  const handleTextFieldClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setSearchInput('');
+  };
+
+  const open = Boolean(anchorEl);
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const filteredOptions = paymentMethodsOptions.filter((option) =>
+    option.Nombre.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
+  const isAllSelected =
+    selectedPaymentMethods.length === 1 && selectedPaymentMethods[0].Tipo === 'all';
+
+  const handleOptionToggle = (option: PaymentMethod) => {
+    if (isAllSelected) {
+      const newSelectedMethods = paymentMethodsOptions.filter(
+        (method) => method.Tipo !== option.Tipo
+      );
+      setSelectedPaymentMethods(newSelectedMethods);
+      updateFieldValue(newSelectedMethods);
+    } else {
+      let newSelectedMethods;
+      if (selectedPaymentMethods.some((method) => method.Tipo === option.Tipo)) {
+        newSelectedMethods = selectedPaymentMethods.filter((method) => method.Tipo !== option.Tipo);
+      } else {
+        newSelectedMethods = [...selectedPaymentMethods, option];
       }
-    };
 
-    fetchPaymentMethods();
-  }, [moneda]);
+      if (newSelectedMethods.length === paymentMethodsOptions.length) {
+        newSelectedMethods = [{ Nombre: 'All', Tipo: 'all', Imagen: '' }];
+        setSearchInput('');
+      }
 
-  const handlePaymentMethodChange = (event: any, newValue: PaymentMethod[]) => {
-    let finalSelection = newValue;
-
-    // Si "Todos" es seleccionado, selecciona todos los métodos de pago disponibles
-    if (newValue.some((method) => method.Tipo === 'all')) {
-      finalSelection = paymentMethodsOptions.filter((method) => method.Tipo !== 'all');
+      setSelectedPaymentMethods(newSelectedMethods);
+      updateFieldValue(newSelectedMethods);
     }
-
-    setSelectedPaymentMethods(finalSelection);
-    const formattedMethods = finalSelection.map((method) =>
-      method.disabled ? `${method.Tipo}:disabled` : method.Tipo
-    );
-    setFieldValue('metodos', formattedMethods.join(','));
   };
 
-  const handleDelete = (method: PaymentMethod) => {
-    const updatedMethods = selectedPaymentMethods.filter(
-      (selectedMethod) => selectedMethod.Tipo !== method.Tipo
+  const handleOptionDisable = (option: PaymentMethod) => {
+    const newSelectedMethods = selectedPaymentMethods.map((method) =>
+      method.Tipo === option.Tipo ? { ...method, disabled: !method.disabled } : method
     );
-    handlePaymentMethodChange(null, updatedMethods);
+    setSelectedPaymentMethods(newSelectedMethods);
+    updateFieldValue(newSelectedMethods);
   };
 
-  const handleDisable = (method: PaymentMethod) => {
-    const updatedMethods = selectedPaymentMethods.map((selectedMethod) =>
-      selectedMethod.Tipo === method.Tipo
-        ? { ...selectedMethod, disabled: !selectedMethod.disabled }
-        : selectedMethod
-    );
-    handlePaymentMethodChange(null, updatedMethods);
+  const handleOptionDelete = (option: PaymentMethod) => {
+    if (option.Tipo === 'all') {
+      setSelectedPaymentMethods([]);
+      setFieldValue('metodos', '');
+    } else {
+      const newSelectedMethods = selectedPaymentMethods.filter(
+        (method) => method.Tipo !== option.Tipo
+      );
+      setSelectedPaymentMethods(newSelectedMethods);
+      updateFieldValue(newSelectedMethods);
+    }
+  };
+
+  const handleClearAll = () => {
+    setSelectedPaymentMethods([]);
+    setFieldValue('metodos', '');
+  };
+
+  const handleSelectAll = () => {
+    if (isAllSelected) {
+      setSelectedPaymentMethods([]);
+      setFieldValue('metodos', '');
+      setSearchInput('');
+    } else {
+      setSelectedPaymentMethods([{ Nombre: 'All', Tipo: 'all', Imagen: '' }]);
+      setFieldValue('metodos', '');
+      setSearchInput('');
+    }
+  };
+
+  const updateFieldValue = (methods: PaymentMethod[]) => {
+    if (methods.length === 1 && methods[0].Tipo === 'all') {
+      const formattedMethods = paymentMethodsOptions.map((method) => method.Tipo);
+      setFieldValue('metodos', formattedMethods.join(','));
+    } else {
+      const formattedMethods = methods.map((method) =>
+        method.disabled ? `${method.Tipo}:disabled` : method.Tipo
+      );
+      setFieldValue('metodos', formattedMethods.join(','));
+    }
   };
 
   return (
-    <Autocomplete
-      multiple
-      id="payment-methods"
-      options={paymentMethodsOptions}
-      getOptionLabel={(option) => option.Nombre}
-      value={selectedPaymentMethods}
-      onChange={handlePaymentMethodChange}
-      renderTags={(value1, getTagProps) =>
-        value1.map((option, index) => (
-          <Chip
-            label={option.disabled ? `${option.Nombre}:disabled` : option.Nombre}
-            {...getTagProps({ index })}
-            deleteIcon={
-              <>
-                <IconButton aria-label="Disable" onClick={() => handleDisable(option)} size="small">
-                  <Iconify
-                    icon={option.disabled ? 'bi:eye-slash' : 'bi:eye'}
-                    width={16}
-                    height={16}
+    <>
+      <TextField
+        label="Payment Methods"
+        variant="standard"
+        onClick={handleTextFieldClick}
+        InputProps={{
+          startAdornment: (
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                maxHeight: '100%',
+                width: '100%',
+                overflowY: 'auto',
+                padding: '4px 0',
+                '&::-webkit-scrollbar': {
+                  width: '6px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  backgroundColor: '#c1c1c1',
+                  borderRadius: '3px',
+                },
+              }}
+            >
+              {selectedPaymentMethods.map((option) => (
+                <Chip
+                  key={option.Tipo}
+                  label={option.disabled ? `${option.Nombre}:disabled` : option.Nombre}
+                  onDelete={() => handleOptionDelete(option)}
+                  deleteIcon={
+                    option.Tipo !== 'all' ? (
+                      <>
+                        <IconButton onClick={() => handleOptionDisable(option)} size="small">
+                          <Iconify
+                            icon={option.disabled ? 'bi:eye-slash' : 'bi:eye'}
+                            width={16}
+                            height={16}
+                          />
+                        </IconButton>
+                        <IconButton onClick={() => handleOptionDelete(option)} size="small">
+                          <Iconify icon="bi:trash" width={16} height={16} />
+                        </IconButton>
+                      </>
+                    ) : undefined
+                  }
+                  style={{ margin: '2px' }}
+                />
+              ))}
+            </Box>
+          ),
+          endAdornment: selectedPaymentMethods.length > 0 && (
+            <InputAdornment position="end">
+              <IconButton onClick={handleClearAll}>
+                <Iconify icon="eva:close-outline" width={20} height={20} />
+              </IconButton>
+            </InputAdornment>
+          ),
+          readOnly: true,
+        }}
+        multiline
+        minRows={selectedPaymentMethods.length > 0 ? 1 : undefined}
+        maxRows={4}
+        sx={{
+          mt: 2,
+          mb: 1,
+          '& .MuiInputBase-input': {
+            display: 'none',
+          },
+        }}
+      />
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        slotProps={{
+          paper: {
+            style: {
+              maxHeight: '300px', // Altura máxima del Popover
+              overflow: 'auto', // Habilitar scroll
+              scrollbarWidth: 'thin', // Para navegadores que soportan esta propiedad
+            },
+          },
+        }}
+      >
+        <div style={{ padding: 16, width: 300 }}>
+          <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
+            <IconButton onClick={handleClose} size="small">
+              <Iconify icon="eva:close-outline" width={15} height={15} />
+            </IconButton>
+          </Box>
+          {!isAllSelected && (
+            <TextField
+              variant="outlined"
+              placeholder="Search..."
+              value={isAllSelected ? '' : searchInput} // Clear search input if "All" is selected
+              onChange={handleSearchChange}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Iconify icon="eva:search-outline" width={20} height={20} />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{ marginBottom: '8px', mt: 1 }}
+              disabled={isAllSelected} // Disable search when "All" is selected
+            />
+          )}
+          <List dense>
+            <MenuItem onClick={handleSelectAll} style={{ height: 40 }}>
+              <ListItemText primary="All" />
+            </MenuItem>
+            {filteredOptions.map((option) => {
+              const isSelected =
+                isAllSelected ||
+                selectedPaymentMethods.some((method) => method.Tipo === option.Tipo);
+              const isDisabled = selectedPaymentMethods.find(
+                (method) => method.Tipo === option.Tipo
+              )?.disabled;
+
+              return (
+                <MenuItem
+                  key={option.Tipo}
+                  onClick={() => handleOptionToggle(option)}
+                  selected={isSelected}
+                  style={{ height: 40 }}
+                >
+                  <ListItemText
+                    primary={option.Nombre}
+                    style={{ textDecoration: isDisabled ? 'line-through' : 'none' }}
                   />
-                </IconButton>
-                <IconButton aria-label="Delete" onClick={() => handleDelete(option)} size="small">
-                  <Iconify icon="bi:trash" width={16} height={16} />
-                </IconButton>
-              </>
-            }
-            onDelete={() => handleDelete(option)}
-          />
-        ))
-      }
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          variant="standard"
-          label="Payments Solutions "
-          placeholder="Search..."
-        />
-      )}
-    />
+                  {isSelected &&
+                    option.Tipo !== 'all' && ( // Don't show disable for "All"
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          edge="end"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOptionDisable(option);
+                          }}
+                          size="small"
+                        >
+                          <Iconify
+                            icon={isDisabled ? 'bi:eye-slash' : 'bi:eye'}
+                            width={16}
+                            height={16}
+                          />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    )}
+                </MenuItem>
+              );
+            })}
+          </List>
+        </div>
+      </Popover>
+    </>
   );
 };
 
-export default PaymentMethodsSelect;
+export default PaymentMethodsSelectWithSearch;
