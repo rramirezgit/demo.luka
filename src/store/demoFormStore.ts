@@ -148,7 +148,7 @@ const initialState: Omit<
       fontSize: 16,
       height: 50,
     },
-    fontFamily: 'Montserrat',
+    fontFamily: 'Open Sans',
     borderPadding: '1.5rem',
     formBorder: 'solid 1px #dedddd',
     carrusel: {

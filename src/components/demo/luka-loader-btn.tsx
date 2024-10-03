@@ -55,7 +55,7 @@ export function LukaLoaderButton() {
       paypal: {
         color: 'gold',
       },
-      fuente: 'Montserrat',
+      fuente: 'Open Sans',
       seleccion: seleccion === 'imagen' ? 1 : 2,
       showSkeletonLoading: true,
       fnValidacionEsAsync: true,
@@ -109,7 +109,7 @@ export function LukaLoaderButton() {
         paypal: {
           color: 'gold',
         },
-        fuente: 'Montserrat',
+        fuente: 'Open Sans',
         seleccion: seleccion === 'imagen' ? 1 : 2,
         showSkeletonLoading: true,
         fnValidacionEsAsync: true,
